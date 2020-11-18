@@ -1,0 +1,7 @@
+Examples.txt <--- name the file like this
+
+value1:value2:value3:valuex <-- input the data like this
+value1:value2:value3:valuex
+
+^ This should go on until we have enough to fill a nice chunk of the class.
+ It will also be the format user-generated content is added to!
