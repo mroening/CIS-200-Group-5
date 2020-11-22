@@ -1,4 +1,4 @@
-public class Boss extends Monsters
+public class Boss extends Monster
 {
     private String description;
 
@@ -7,14 +7,19 @@ public class Boss extends Monsters
         description = "You see this enemy infront of you, and just can't describe it. You just know that this is gonna be a difficult fight.";
     }
 
-    public Boss(int h, int d, String n){
-        super(h, d, n);
+    public Boss(int h, int d, String n, int dif){
+        super(h, d, n, dif);
         description = "You see this enemy infront of you, and just can't describe it. You just know that this is gonna be a difficult fight.";
     }
 
-    public Boss(int h, int d, String n, String des){
-        super(h, d, n);
+    public Boss(int h, int d, String n, int dif, String des){
+        super(h, d, n, dif);
         description = des;
+    }
+
+    public Boss (Boss exist){
+        super(exist.health, exist.damage, exist.name, exist.difficulty);
+        difficulty = exist.difficulty;
     }
 
     public @Override void setHealth(int h){
@@ -25,12 +30,12 @@ public class Boss extends Monsters
         return (super.getHealth());
     }
 
-    public @Override void setDamage(int change){
-        super.setDamage(change);
+    public @Override int getDamage(){
+        return super.getDamage();
     }
 
-    public @Override int getDamage(){
-        return damage;
+    public @Override double getDodge(){
+        return super.getDodge();
     }
 
     public String toString(){
