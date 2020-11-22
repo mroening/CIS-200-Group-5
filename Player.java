@@ -15,6 +15,7 @@ public class Player {
  private int dmg;
  private Equipment healthEquipment;
  private Equipment dmgEquipment;
+ private int gold;
  
  private final int DEFAULT_HEALTH = 10;
  private final int DEFAULT_DMG = 2;
@@ -24,6 +25,9 @@ public class Player {
 	name = "Player";
 	health = DEFAULT_HEALTH;
 	dmg = DEFAULT_DMG;
+	healthEquipment = new Equipment();
+	dmgEquipment = new Equipment();
+	
  }
  
  
@@ -31,15 +35,33 @@ public class Player {
 	name = n;
 	health = DEFAULT_HEALTH;
 	dmg = DEFAULT_DMG;
+	healthEquipment = new Equipment();
+	dmgEquipment = new Equipment();
  }
  
+ public void addReward(Reward r) {
+	if(r.getType().equalsIgnoreCase("armor")) {
+		equipArmor(r.getEquipment());
+	} else if(r.getType().equalsIgnoreCase("weapon")) {
+		equipWeapon(r.getEquipment()); {
+			
+		}
+	}
+	gold += r.getGold();
+ }
+ public int getGold() {
+	 return gold;
+ }
+ public String getEquipment() {
+	 return "\n\tArmor: "+ healthEquipment.getName() + "\n\tWeapon: "+ dmgEquipment.getName();
+ }
  
- public void equipArmor(Equipment e) {
+ private void equipArmor(Equipment e) {
 	healthEquipment = e;
  }
  
  
- public void equipWeapon(Equipment e) {
+ private void equipWeapon(Equipment e) {
 	dmgEquipment = e;
  }
  
