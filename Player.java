@@ -76,5 +76,8 @@ public class Player {
  public void getName(int d) {
 	dmg = d;
  }
+ public String toString(){
+        return ("Player's name: " + getName() + "\nHealth: " + getHealth() + "\nDamage: " + getDmg());
+    }
  
 }
