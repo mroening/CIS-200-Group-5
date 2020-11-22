@@ -23,6 +23,7 @@ public class Trap extends Event{
 		failMessage = f;
 		successMessage = s;
 	}
+	//The higher the number the more likely you are to succeede
 	public void disarm(int chance) {
 		System.out.println(description);
 		Random rand = new Random();
