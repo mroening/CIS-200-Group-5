@@ -1,16 +1,23 @@
 import java.util.*;
 
 public class  Event{
-	protected Player playerInfo;
+	protected Player player;
 	protected String description;
-	//protected Reward reward;
+	protected Reward reward;
 	
 	public Event() {
-		playerInfo = new Player();
+		player = new Player();
 		description = "No description";
+		reward = null;
 	}
 	public Event(Player p, String d) {
-		playerInfo = p;
+		player = p;
 		description = d;
+		reward = null;
+	}
+	public Event(Player p, String d,Reward r) {
+		player = p;
+		description = d;
+		reward = r;
 	}
 }

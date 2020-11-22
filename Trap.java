@@ -17,18 +17,26 @@ public class Trap extends Event{
 		failMessage = f;
 		successMessage = s;
 	}
-	public void disarm(int bound) {
-		if(bound % 2 != 0) {
-			bound++;
-		}
+	public Trap(Player p,String d, int a,String f, String s, Reward r) {
+		super(p,d,r);
+		damage = a;
+		failMessage = f;
+		successMessage = s;
+	}
+	public void disarm(int chance) {
 		System.out.println(description);
 		Random rand = new Random();
-		int a = rand.nextInt(bound+1);
-		if(a >= bound/2) {
+		int a = rand.nextInt(100+1);
+		int playerHealth = player.getHealth();
+		if(a > chance) {
 			System.out.println(failMessage);
-			playerInfo.Hurt(damage);
+			player.setHealth(playerHealth-damage);
 		} else {
 			System.out.println(successMessage);
+			if(reward != null) {
+			player.addReward(reward);
 		}
+		}
+		
 	}
 }

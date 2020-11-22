@@ -6,9 +6,6 @@ public class  Choice extends Event {
 	
 	public Choice() {
 		super();
-		playerInfo = new Player();
-		//reward = null;
-		description = "No description";
 		optionA = "N/A";
 		optionB = "N/A";
 	}
@@ -16,7 +13,14 @@ public class  Choice extends Event {
 		super(p,d);
 		optionA = a;
 		optionB = b;
-		//reward = null;
+	}
+	public Choice(Player p,String d, String a, String b, Reward r) {
+		super(p,d,r);
+		optionA = a;
+		optionB = b;
+	}
+	public Reward getReward() {
+		return reward;
 	}
 	public boolean userChoice() {
 		Scanner s = new Scanner(System.in);
