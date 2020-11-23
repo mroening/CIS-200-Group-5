@@ -27,4 +27,5 @@ public class Reward {
 	public Equipment getEquipment() {
 		return equip;
 	}
+	
 }

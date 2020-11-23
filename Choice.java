@@ -9,18 +9,15 @@ public class  Choice extends Event {
 		optionA = "N/A";
 		optionB = "N/A";
 	}
-	public Choice(Player p,String d, String a, String b) {
-		super(p,d);
+	public Choice(Player p,String des, String a, String b) {
+		super(p,des);
 		optionA = a;
 		optionB = b;
 	}
-	public Choice(Player p,String d, String a, String b, Reward r) {
-		super(p,d,r);
+	public Choice(Player p,String des, String a, String b, String message, Reward r) {
+		super(p,d,r,message);
 		optionA = a;
 		optionB = b;
-	}
-	public Reward getReward() {
-		return reward;
 	}
 	public boolean userChoice() {
 		Scanner s = new Scanner(System.in);
@@ -29,6 +26,9 @@ public class  Choice extends Event {
 		String reply = s.nextLine();
 		
 		if(reply.equalsIgnoreCase("a")) {
+			if(reward != null) {
+				System.out.println(rewardMessage);
+			}
 			return false;
 		} else if(reply.equalsIgnoreCase("b")) {
 			return true;

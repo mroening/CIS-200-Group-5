@@ -11,19 +11,19 @@ public class Trap extends Event{
 		successMessage = "You succeded";
 		
 	}
-	public Trap(Player p,String d, int a,String f, String s) {
+	public Trap(Player p,String des, int dmg,String fail, String suc) {
 		super(p,d);
 		damage = a;
 		failMessage = f;
 		successMessage = s;
 	}
-	public Trap(Player p,String d, int a,String f, String s, Reward r) {
-		super(p,d,r);
-		damage = a;
-		failMessage = f;
-		successMessage = s;
+	public Trap(Player p,String des, int dmg,String fail, String suc, Reward r) {
+		super(p,des,r);
+		damage = dmg;
+		failMessage = fail;
+		successMessage = suc;
 	}
-	//The higher the number the more likely you are to succeede
+	//The higher the number the more likely you are to succede
 	public void disarm(int chance) {
 		System.out.println(description);
 		Random rand = new Random();
