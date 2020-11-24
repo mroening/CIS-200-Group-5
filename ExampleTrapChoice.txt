@@ -1,0 +1,8 @@
+Choices:
+(Player):Description:Option A:Option B:Reward Message:(Reward):Resolution A:Resolution B:(Location)
+new Choice(Player,description,optiona,optionb,rewardmessage,reward);
+choice.setResolution(a,b);
+choice.setLocation("cave");
+Traps:
+(Player):Description:int dmg:Fail Message:Success Message:(Reward):Reward Messge:Location
+trap.setLocation("cave");
