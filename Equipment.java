@@ -1,7 +1,7 @@
 /* Trent Powell- Group 5 Final Proj. (Equipment Class)
 * CIS 200/ Scholars Section
 * 
-* 
+* _________________________________________________
 */
 
 import java.util.*;
@@ -45,6 +45,10 @@ public class Equipment {
  
  public int getRarity() {
 	return rarity;
+ }
+ 
+ public String toString() {
+	return("Name: " + name + "\nBonus: +" + value);
  }
  
 }
