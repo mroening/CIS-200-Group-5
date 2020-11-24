@@ -3,6 +3,8 @@ import java.util.*;
 public class  Choice extends Event {
 	private String optionA;
 	private String optionB;
+	private String resolutionA;
+	private String resolutionB;
 	
 	public Choice() {
 		super();
@@ -15,10 +17,15 @@ public class  Choice extends Event {
 		optionB = b;
 	}
 	public Choice(Player p,String des, String a, String b, String message, Reward r) {
-		super(p,d,r,message);
+		super(p,des,r,message);
 		optionA = a;
 		optionB = b;
 	}
+	public void setResolution(String a, String b) {
+		resolutionA = a;
+		resolutionB = b;
+	}
+	
 	public boolean userChoice() {
 		Scanner s = new Scanner(System.in);
 		System.out.println(description);
@@ -26,11 +33,14 @@ public class  Choice extends Event {
 		String reply = s.nextLine();
 		
 		if(reply.equalsIgnoreCase("a")) {
+			System.out.println(resolutionA);
 			if(reward != null) {
 				System.out.println(rewardMessage);
+				player.addReward(reward);
 			}
 			return false;
 		} else if(reply.equalsIgnoreCase("b")) {
+			System.out.println(resolutionB);
 			return true;
 		} else {
 			return false;

@@ -1,0 +1,12 @@
+(Player):While walking, you find that the path you are on forks to the right and left.:Go Right:Go Left:After walking for awhile longer, you see an old man who gives you some gear, after telling you it's dangerous to go alone.:(Random Reward):You turn to the right, hoping to find something interesting:You turn to the left, hoping to find something mysterious.:Village
+(Player):::::(Random Reward):::Village
+(Player):::::(Random Reward):::Village
+(Player):You see a darker section of the cave to your left.:Enter the darker section of the cave:Stay in the lighter section:While you walk in the dark, your foot hits something laying on the ground:(Random Reward):You enter the darker section of the cave, hoping to find a discarded weapon or some armor:You continue walking in the light, you want to leave as soon as possible:Cave
+(Player):::::(Random Reward):::Cave
+(Player):::::(Random Reward):::Cave
+(Player):::::(Random Reward):::Forest
+(Player):::::(Random Reward):::Forest
+(Player):::::(Random Reward):::Forest
+(Player):::::(Random Reward):::Wasteland
+(Player):::::(Random Reward):::Wasteland
+(Player):::::(Random Reward):::Wasteland

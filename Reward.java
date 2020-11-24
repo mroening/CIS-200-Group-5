@@ -27,5 +27,13 @@ public class Reward {
 	public Equipment getEquipment() {
 		return equip;
 	}
-	
+	public String toString() {
+		String name = equip.getName();
+		
+		if(type.equalsIgnoreCase("weapon")) {
+		return "a " +type+ " and " +gold+ " gold!";
+		} else {
+			return "a piece of " +type+ " and "+gold+" gold!";
+		}
+	}
 }

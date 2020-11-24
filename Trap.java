@@ -12,13 +12,13 @@ public class Trap extends Event{
 		
 	}
 	public Trap(Player p,String des, int dmg,String fail, String suc) {
-		super(p,d);
-		damage = a;
-		failMessage = f;
-		successMessage = s;
+		super(p,des);
+		damage = dmg;
+		failMessage = fail;
+		successMessage = suc;
 	}
-	public Trap(Player p,String des, int dmg,String fail, String suc, Reward r) {
-		super(p,des,r);
+	public Trap(Player p,String des, int dmg,String fail, String suc, Reward r,String message) {
+		super(p,des,r,message);
 		damage = dmg;
 		failMessage = fail;
 		successMessage = suc;
@@ -28,14 +28,16 @@ public class Trap extends Event{
 		System.out.println(description);
 		Random rand = new Random();
 		int a = rand.nextInt(100+1);
-		int playerHealth = player.getHealth();
 		if(a > chance) {
 			System.out.println(failMessage);
-			player.setHealth(playerHealth-damage);
+			player.takeDamage(damage);
 		} else {
-			System.out.println(successMessage);
+			System.out.print(successMessage+" ");
 			if(reward != null) {
+			System.out.println(rewardMessage+"\n");
 			player.addReward(reward);
+		} else {
+			System.out.println("");
 		}
 		}
 		

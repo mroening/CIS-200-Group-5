@@ -1,0 +1,12 @@
+(Player):You see a dilapidated house and decide to check it out:1:As you open the door, a bucket of water splashes on your head. Now you're all cold and wet.:You open the door and look around for a few minutes.:(Randomly Generated Reward):After a bit of searching, you notice something sitting in the corner of the house.:Village
+(Player):::::(Randomly Generated Reward)::Village
+(Player):::::(Randomly Generated Reward)::Village
+(Player):You see a chest and try to open it.:3:You start pushing it open, but it's too heavy and it crushes your hand.:You successfully open the chest.:(Randomly Generated Reward):As you look inside, you yell with excitement!:Cave
+(Player):On your way to the exit, some bats are hanging from the ceiling. You need to sneak past them.:3:You try your best, but you trip and make a loud sound when you hit the floor, waking up the bats. They scratch at your skin as you run away.:Before you make a move, some of the bats fly in the other direction. You think you see a strange glow from where they were, and go to check it out.:(Randomly Generated Reward):It turns out that the strange glow was a piece of equipment, so you grab it quietly and leave:Cave
+(Player):::::(Randomly Generated Reward)::Cave
+(Player):::::(Randomly Generated Reward)::Forest
+(Player):::::(Randomly Generated Reward)::Forest
+(Player):::::(Randomly Generated Reward)::Forest
+(Player):::::(Randomly Generated Reward)::Wasteland
+(Player):::::(Randomly Generated Reward)::Wasteland
+Player):::::(Randomly Generated Reward)::Wasteland

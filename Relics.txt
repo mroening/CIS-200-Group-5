@@ -1,0 +1,24 @@
+Sword of Swords:weapon:
+Axe of Fire:weapon:
+Cane Sword:weapon:
+Brass Knuckles:weapon
+Templar's Blade:weapon
+Bladed Glove:weapon
+Conductor's Baton:weapon
+Blue-Steel Dagger:weapon
+Paladin's Hammer:weapon
+Ogre's Club:weapon
+Wizard's Staff:weapon
+Demon's Spear:weapon
+Iron Breastplate:armor
+Wizard's Robes:armor
+Enchanted Necklace:armor
+Stylish Fedora:armor
+Mythril Chainmail:armor
+The Power of Friendship:armor
+Yawarakai-Te:armor
+Frying Pan Shield:armor
+Meat Shield:armor
+Plot Armor:armor
+A Vinyl Record:armor
+Medical Mask:armor

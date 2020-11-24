@@ -17,11 +17,15 @@ public class  Event{
 		description = d;
 		reward = null;
 	}
+	/*The rewardMessage is only how the reward is found when it's entered
+	* afterwards, it appends the Reward equipment and gold values.
+	*/
 	public Event(Player p, String d,Reward r, String rew) {
 		player = p;
 		description = d;
 		reward = r;
-		rewardMessage = rew;
+		rewardMessage = rew + " You found " +reward.toString();
+		
 	}
 	public void setLocation(String loc) {
 		location = loc;
