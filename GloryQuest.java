@@ -3,8 +3,9 @@ import java.io.*;
 
 public class GloryQuest {
 	
+	Scanner s = new Scanner(System.in);
+	
 	public static void main(String[] args) {
-		Scanner s = new Scanner(System.in);
 		
 		System.out.print("Welcome to GLORYQUEST! Type (P)lay to play GLORYQUEST, or type (D)ev to enter Developer mode: ");
 		char titleChoice = s.nextLine().toLowerCase().charAt(0);
@@ -16,9 +17,15 @@ public class GloryQuest {
 			} catch (IOException x) {
 				System.out.println("There was an error with the file! Please check your installation and try again.");
 			}
+		} else if (titleChoice == 'p') {
+			playGame(s);
 		} else {
 			System.out.println("You think you're a funny man, dont'cha? A real razzle-dazzler! Why don't you go try to impress a Commadore, you fish-lipped clown college drop-out.");
 		}
+		
+	}
+	
+	public static void playGame () {
 		
 	}
 
