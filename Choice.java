@@ -25,7 +25,7 @@ public class  Choice extends Event {
 		resolutionA = a;
 		resolutionB = b;
 	}
-	
+	/* Method that allows the user to enter which option they want to take*/
 	public boolean userChoice() {
 		Scanner s = new Scanner(System.in);
 		System.out.println(description);

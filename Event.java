@@ -6,19 +6,24 @@ public class  Event{
 	protected Reward reward;
 	protected String location;
 	protected String rewardMessage;
-	
+	/*No param constructor
+	*
+	*/
 	public Event() {
 		player = new Player();
 		description = "No description";
 		reward = null;
 	}
+	/*Constructor that intializes the player and description of the event
+	*
+	*/
 	public Event(Player p, String d) {
 		player = p;
 		description = d;
 		reward = null;
 	}
-	/*The rewardMessage is only how the reward is found when it's entered
-	* afterwards, it appends the Reward equipment and gold values.
+	/*Constructor that intializes the player and description of the event, as well as both the reward
+	* and the message that is shown when the reward is given
 	*/
 	public Event(Player p, String d,Reward r, String rew) {
 		player = p;
@@ -27,6 +32,9 @@ public class  Event{
 		rewardMessage = rew + " You found " +reward.toString();
 		
 	}
+	/* Sets the location of the trap based on story flags
+	*
+	*/
 	public void setLocation(String loc) {
 		location = loc;
 	}

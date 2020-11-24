@@ -1,24 +1,24 @@
-Sword of Swords:weapon:
-Axe of Fire:weapon:
-Cane Sword:weapon:
-Brass Knuckles:weapon
-Templar's Blade:weapon
-Bladed Glove:weapon
-Conductor's Baton:weapon
-Blue-Steel Dagger:weapon
-Paladin's Hammer:weapon
-Ogre's Club:weapon
-Wizard's Staff:weapon
-Demon's Spear:weapon
-Iron Breastplate:armor
-Wizard's Robes:armor
-Enchanted Necklace:armor
-Stylish Fedora:armor
-Mythril Chainmail:armor
-The Power of Friendship:armor
-Yawarakai-Te:armor
-Frying Pan Shield:armor
-Meat Shield:armor
-Plot Armor:armor
-A Vinyl Record:armor
-Medical Mask:armor
+Sword of Swords:weapon:1:1
+Axe of Fire:weapon:2:1
+Cane Sword:weapon:3:1
+Brass Knuckles:weapon:4:2
+Templar's Blade:weapon:5:2
+Bladed Glove:weapon:6:2
+Conductor's Baton:weapon:7:3
+Blue-Steel Dagger:weapon:8:3
+Paladin's Hammer:weapon:9:4
+Ogre's Club:weapon:10:4
+Wizard's Staff:weapon:11:5
+Demon's Spear:weapon:12:5
+Iron Breastplate:armor:5:1
+Wizard's Robes:armor:10:1
+Enchanted Necklace:armor:13:1
+Stylish Fedora:armor:15:2
+Mythril Chainmail:armor:18:2
+The Power of Friendship:armor:20:2
+Yawarakai-Te:armor:25:3
+Frying Pan Shield:armor:28:3
+Meat Shield:armor:30:4
+Plot Armor:armor:35:4
+A Vinyl Record:armor:37:5
+Medical Mask:armor:40:5
