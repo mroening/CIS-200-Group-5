@@ -6,12 +6,12 @@ public class Reward {
 	public Reward() {
 		gold = 0;
 		type = "NONE";
-		equip = null;
+		equip = new Equipment();
 	}
 	public Reward(int g) {
 		gold = g;
 		type = "NONE";
-		equip = null;
+		equip = new Equipment();
 	}
 	public Reward(int g,Equipment e) {
 		gold = g;

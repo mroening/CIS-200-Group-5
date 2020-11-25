@@ -17,6 +17,8 @@ public class Player {
  private Equipment dmgEquipment;
  private int gold;
  protected Scanner s;
+ private int healthBuff = 0;
+ private int damageBuff = 0;
  
  private final int DEFAULT_HEALTH = 10;
  private final int DEFAULT_DMG = 2;
@@ -108,16 +110,29 @@ public void equipArmor(Equipment e) {
  }
  public void takeDamage(int damage) {
 	System.out.println("You took "+damage+" damage!");
-	health -= damage;
+	if (health - damage < 1)
+		health = 1;
+	else
+		health -= damage;
+	
  }
  
  public void setMaxHealth() {
-	maxHealth = DEFAULT_HEALTH + healthEquipment.getValue();
+	maxHealth = DEFAULT_HEALTH + healthBuff + healthEquipment.getValue();
  }
  
+ public void addMaxHealth(int buff) {
+	healthBuff += buff;
+	setMaxHealth();
+ }
+ 
+ public void addDamage(int buff) {
+	damageBuff += buff;
+	setDamage();
+ }
  
  public void setDamage() {
-	dmg = DEFAULT_DMG + dmgEquipment.getValue();
+	dmg = DEFAULT_DMG + damageBuff + dmgEquipment.getValue();
  }
  
  public String toString(){

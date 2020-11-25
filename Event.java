@@ -29,7 +29,7 @@ public class  Event{
 		player = p;
 		description = d;
 		reward = r;
-		rewardMessage = rew + " You found " +reward.toString();
+		rewardMessage = rew;
 		
 	}
 	/* Sets the location of the trap based on story flags
@@ -40,5 +40,12 @@ public class  Event{
 	}
 	public Reward getReward() {
 		return reward;
+	}
+	
+	public void setPlayer (Player p) {
+		this.player = p;
+	}
+	public void setReward (Reward r) {
+		this.reward = r;
 	}
 }

@@ -35,8 +35,98 @@ public class Input {
 		} 
 	}
 	
-	public void createEquipment () {
-		// take in input, check for validity, add it to a file
+	public void createEquipment () throws IOException {
+		String name = "";
+		String type = "";
+		int value = 0;
+		int rarity = 0;
+		
+		File equipmentFile = new File("Relics.txt");
+		Scanner readFile = new Scanner(equipmentFile);
+		
+		// add tutorial/point to README
+		System.out.println("Welcome to Equipment creation!");
+		
+		// getting a valid type for the equipment
+		do {
+			System.out.print("Choose if this is a (W)eapon or a piece of (A)rmor: ");
+			type = s.nextLine().toLowerCase();
+			if (type.charAt(0) != 'w' && type.charAt(0) != 'a')
+				System.out.println("Please choose a valid type!");
+				
+				
+		} while (type.charAt(0) != 'w' && type.charAt(0) != 'a');
+				 
+		if (type.charAt(0) == 'w')
+			type = "weapon";
+		else if (type.charAt(0) == 'a')
+			type = "armor";
+			
+		// getting a valid (non-duplicate) name for the monster
+		boolean openName = false;
+		ArrayList <String> currentRelics = new ArrayList <> ();
+		while (readFile.hasNext()) {
+				String line = readFile.nextLine();
+				currentRelics.add(line);
+		}
+		readFile.close();
+		
+		while (openName == false) {
+			System.out.print("Enter a name for this " + type + ": ");
+			name = s.nextLine();
+			openName = true;
+			for (int i = 0; i < currentRelics.size(); i++) {
+				String[] pieces = currentRelics.get(i).split(":");
+				if (name.equalsIgnoreCase(pieces[0])) {
+					System.out.println(type + " already exists! Enter a different name.");
+					openName = false;
+				}
+			}
+		}
+		
+		// getting valid value
+		boolean validValue = false;
+		while (validValue == false) {
+			try {
+				if (type.equals("weapon"))
+					System.out.print("Enter this " + name + "'s damage: ");
+				else
+					System.out.print("Enter this " + name + "'s defense: ");
+				value = Integer.parseInt(s.nextLine());
+				validValue = true;
+			} catch (NumberFormatException x) {
+				System.out.println("Please input only integers!");
+				validValue = false;
+			}
+		}
+		
+		// getting valid rarity
+		boolean validRarity = false;
+		while (validRarity == false) {
+			try {
+				System.out.print("Enter this " + name + "'s rarity: ");
+				rarity = Integer.parseInt(s.nextLine());
+				validRarity = true;
+				
+				if (rarity < 0 || rarity > 10) {
+					System.out.println("Value must be between 1-10!");
+					validRarity = false;
+				}
+			} catch (NumberFormatException x) {
+				System.out.println("Please input only integers!");
+				validRarity = false;
+			}
+		}
+		
+		
+		// writing to a file
+		System.out.println("Creating equipment...");
+		String outputString = name + ":" + type + ":" + value + ":" + rarity;
+		FileWriter writeFile = new FileWriter(equipmentFile, true);
+		writeFile.write("\n" + outputString);
+		writeFile.close();
+		System.out.println("Equipment created! May it serve you well on your quest!");
+		
 		
 	}
 	
@@ -128,6 +218,11 @@ public class Input {
 				System.out.print("Enter this " + name + "'s difficulty: ");
 				difficulty = Integer.parseInt(s.nextLine());
 				validDifficulty = true;
+				
+				if (difficulty < 0 || difficulty > 10) {
+					System.out.println("Value must be between 1-10!");
+					validDifficulty = false;
+				}
 			} catch (NumberFormatException x) {
 				System.out.println("Please input only integers!");
 				validDifficulty = false;

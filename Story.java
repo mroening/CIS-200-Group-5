@@ -22,6 +22,10 @@ public class Story {
 					"\nDo you continue deeper into the dark forest or do you enter into the dark cave? ");
 		System.out.print("\n'(F)orest' or '(C)ave': ");
 		String answer = s.nextLine();
+		
+		if (answer.equals("")) // stops the program from crashing if the player fails to input anything
+			answer = "Zoinks!";
+			
 		if (answer.charAt(0) == 'C' || answer.charAt(0) == 'c') {
 			System.out.println("\nYou enter the cave with your sword in hand expecting to encounter something ferocious.");
 			story.add(0, "cave");
@@ -47,6 +51,10 @@ public class Story {
 								"\nwith an important decision once again. Do you go deeper into the cave or towards the bright light?");
 			System.out.print("\n'(D)eeper' or '(L)ight': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'D' || answer.charAt(0) == 'd') {
 				System.out.println("\nYou decide to continue deeper into the cave persistent in the idea that" +
 									"\nyour quest must have to do with the cave. Why else would you be here?");
@@ -73,6 +81,10 @@ public class Story {
 								"\nDo you go deeper into the forest or towards the village in the distance?");
 			System.out.print("\n'(D)eeper' or '(V)illage': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'D' || answer.charAt(0) == 'd') {
 				System.out.println("\nYou decide to continue deeper into the forest, thinking that entering a random village" +
 									"\ncould be dangerous and it almost certainly isn't the right way to go to complete your quest."); 
@@ -141,6 +153,10 @@ public class Story {
 								"\nthat has been fattening him up will not be too happy. Do you want to save him? ");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nYou cut the man from the webs and he explains to you that he too was on an adventure. He teaches you" +
 									"\nhis fighting tricks and helps increase your ability to fight.");
@@ -167,6 +183,10 @@ public class Story {
 								"\nyou can tell that the man is in desperate need of assistance! Do you help the man?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nRight as you touch the man's shoulder to help him up you wince in pain as if the man has stung you!" +
 									"\nThe man is cursed and your body seems to be starting to become part undead! In your new half " +
@@ -193,6 +213,10 @@ public class Story {
 								"\nis blocked shut by a giant rock. Do you push the rock over and go inside the shed?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nYou move the rock over with all of your strength and open the shed and to your surprise," +
 									"\nthe shed is completely empty except for a man that was sleeping inside. He explains that " +
@@ -215,6 +239,10 @@ public class Story {
 								"\nYou get closer and hear a child crying inside. Do you enter the house?" );
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nYou enter the house and the child goes silent in fear. You look around until you find the child" +
 									"\nhuddled into a corner. You assure the child you will not hurt him and he seems comforted to see" +
@@ -280,6 +308,10 @@ public class Story {
 								"\nWhile a little crazy, you are tempted to help the wild animal out from under the rock, do you help it?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nAs you lift the rubble, the coyote gets up and starts running in circles. You decide it is best to move on." +
 									"\nYou continue down the cave and coyote trails you. It must be hungry if it is this deep in a cave so " +
@@ -306,6 +338,10 @@ public class Story {
 								"\nand have a tasty meal to refill on food. Do you try to tame it?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nYou reach out your hand and boar rears back with its head down charging at you. Your assumption was way off" +
 									"\nand you try to dodge out of the way as the boar cuts you on the leg as you jump away.");
@@ -334,6 +370,10 @@ public class Story {
 								"\ncertain that this is a witch, but know that witches don't tell a lie. Do you take the strength potion?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nYou decide to take the potion and feel instant effects! The potion makes your arm muscles bulge, but..." +
 									"\nunfortunately as your arms grow in strength, your legs feel weaker and more unstable. While you are " +
@@ -359,6 +399,10 @@ public class Story {
 								"\nDo you share with the raccoons?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
+			
+			if (answer.equals(""))
+			answer = "Zoinks!";
+			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nAs you step into the house, the raccoons start grabbing all of the food and running it out the window." +
 									"\nYou unfortunately were only able to save a little bit of it before the raccoon gave the rest up." +

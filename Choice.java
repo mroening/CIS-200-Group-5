@@ -34,7 +34,7 @@ public class  Choice extends Event {
 		
 		if(reply.equalsIgnoreCase("a")) {
 			System.out.println(resolutionA);
-			if(reward != null) {
+			if(!reward.getType().equals("NONE")) {
 				System.out.println(rewardMessage);
 				player.addReward(reward);
 			}
