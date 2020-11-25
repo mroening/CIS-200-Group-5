@@ -46,7 +46,6 @@ public class Battles{
                             else{
                                 System.out.println("The monster failed to dodge your attack, you land a critical hit.");
                                 mons.setHealth(mons.getHealth() - damageReturn);
-                                System.out.println(monsterUpdate(mons));
                             }
                         }
                         else{
@@ -65,7 +64,7 @@ public class Battles{
                         }
                         else{
                             System.out.println("You can't completely block the attack. You take some damage.");
-                            play.setHealth(play.getHealth() - damageReturn);
+                            player.setHealth(player.getHealth() - damageReturn);
                             skipMonsterTurn = true;
                         }
                         break;
@@ -180,7 +179,6 @@ public class Battles{
                             else{
                                 System.out.println("The monster failed to dodge your attack, you land a critical hit.");
                                 mons.setHealth(mons.getHealth() - damageReturn);
-                                System.out.println(monsterUpdate(mons));
                             }
                         }
                         else{
@@ -279,7 +277,6 @@ public class Battles{
                             else{
                                 System.out.println("The boss failed to dodge your attack, you land a critical hit.");
                                 bos.setHealth(bos.getHealth() - damageReturn);
-                                System.out.println(bossUpdate(bos));
                             }
                         }
                         else{
@@ -413,7 +410,6 @@ public class Battles{
                             else{
                                 System.out.println("The boss failed to dodge your attack, you land a critical hit.");
                                 bos.setHealth(bos.getHealth() - damageReturn);
-                                System.out.println(bossUpdate(bos));
                             }
                         }
                         else{
@@ -488,11 +484,14 @@ public class Battles{
         return damageReturn;
     }
 
-    private static int playerBlockM(Monster mons, double blockChance){
+    private static int playerBlockM(Monster mons, double blockChance){ //look in here for changing values
         double playerChance = Math.random();
         int damageReturn = 0;
         if (playerChance < blockChance)
-            damageReturn = ((mons.getDamage()/2) + 1);
+			if (mons.getDamage() == 1)
+				damageReturn = 1;
+			else
+				damageReturn = ((mons.getDamage()/2));
         return damageReturn;
     }
 
@@ -501,7 +500,10 @@ public class Battles{
         double playerChance = Math.random();
         int damageReturn = 0;
         if (playerChance < successBlock)
-            damageReturn = ((bo.getDamage()/2) + 1);
+			if (bo.getDamage() == 1)
+				damageReturn = 1;
+			else
+				damageReturn = ((bo.getDamage()/2));
         return damageReturn;
     }
 

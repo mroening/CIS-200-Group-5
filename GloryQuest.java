@@ -28,6 +28,7 @@ public class GloryQuest {
 	}
 	
 	public static void playGame () throws IOException {
+		Random r = new Random();
 		
 		// reading in content from files and putting it into ArrayLists
 		ArrayList <Equipment> relics = new ArrayList <> ();
@@ -43,16 +44,19 @@ public class GloryQuest {
 		ArrayList <Trap> forestTraps = new ArrayList <> ();
 		ArrayList <Trap> wastelandTraps = new ArrayList <> ();
 		ArrayList <Trap> villageTraps = new ArrayList <> ();
+		ArrayList <Boss> bosses = new ArrayList <> ();
 		
 		File equipmentFile = new File("Relics.txt");
 		File monsterFile = new File("Monsters.txt");
 		File choiceFile = new File("Choices.txt");
 		File trapFile = new File("Traps.txt");
+		File bossFile = new File("Bosses.txt");
 		
 		Scanner readEquipmentFile = new Scanner(equipmentFile);
 		Scanner readMonsterFile = new Scanner(monsterFile);
 		Scanner readChoiceFile = new Scanner(choiceFile);
 		Scanner readTrapFile = new Scanner(trapFile);
+		Scanner readBossFile = new Scanner(bossFile);
 		
 		// reading in equipment
 		while (readEquipmentFile.hasNext()) {
@@ -116,6 +120,16 @@ public class GloryQuest {
 		}
 		readTrapFile.close();
 		
+		
+		// reading in bosses
+		while (readBossFile.hasNext()) {
+				String line = readBossFile.nextLine();
+				String [] pieces = line.split(":");
+				Boss tempBoss = new Boss(pieces[0], Integer.parseInt(pieces[1]), Integer.parseInt(pieces[2]), pieces[3], Integer.parseInt(pieces[4]));
+				bosses.add(tempBoss);
+		}
+		readBossFile.close();
+		
 		Scanner s = new Scanner(System.in);
 		
 		int time = 0;
@@ -126,25 +140,157 @@ public class GloryQuest {
 		System.out.println("Of course! " + name + "! Now sit back, relax, and get comfy! You're about to embark on...");
 		
 		Player hero = new Player(name);
-		Story story = new Story(name);
+		Story story = new Story(name); // The Quest Begins!
+		chill();
 		
-		if (story.getEventDecision(0).equals("cave"))
-			time = theCave(time);
-		else 
-			time = theForest(time, hero, relics, forestMonsters, forestChoices, forestTraps);
+		// first half of the game
+		if (story.getEventDecision(0).equals("cave")) {
+			while (time < 3) {
+				time = theCave(time, hero, relics, caveMonsters, caveChoices, caveTraps);
+			}
+			story.event1();
+			chill();
+			while (time < 6) {
+				time = theCave(time, hero, relics, caveMonsters, caveChoices, caveTraps);
+			}
+			story.event2();
+			chill();
+			
+		} else {
+			while (time < 3) {
+				time = theForest(time, hero, relics, forestMonsters, forestChoices, forestTraps);
+			}
+			story.event1();
+			chill();
+			while (time < 6) {
+				time = theForest(time, hero, relics, forestMonsters, forestChoices, forestTraps);
+			}
+			story.event2();
+			chill();
+		}
+		
+		// Last half of the game 
+		if (story.getEventDecision(1).equals("cave")) {
+			while (time < 11) {
+				int isStory = r.nextInt(4);
+				if (isStory == 0) {
+					storyBook(story, hero);
+					time++;
+				} else {
+					time = theCave(time, hero, relics, caveMonsters, caveChoices, caveTraps);
+				}
+			}
+			story.event7();
+			chill();
+			bossBattle(getBoss(story.getEventDecision(1), bosses), hero);
+			
+		} else if (story.getEventDecision(1).equals("forest")) {
+			while (time < 11) {
+				int isStory = r.nextInt(4);
+				if (isStory == 0) {
+					storyBook(story, hero);
+					time++;
+				} else {
+					time = theForest(time, hero, relics, forestMonsters, forestChoices, forestTraps);
+				}
+			}
+			story.event7();
+			chill();
+			bossBattle(getBoss(story.getEventDecision(1), bosses), hero);
+			
+		} else if (story.getEventDecision(1).equals("wasteland")) {
+			while (time < 11) {
+				int isStory = r.nextInt(4);
+				if (isStory == 0) {
+					storyBook(story, hero);
+					time++;
+				} else {
+					time = theWasteland(time, hero, relics, wastelandMonsters, wastelandChoices, wastelandTraps);
+				}
+			}
+			story.event7();
+			chill();
+			bossBattle(getBoss(story.getEventDecision(1), bosses), hero);
+			
+		} else {
+			while (time < 11) {
+				int isStory = r.nextInt(4);
+				if (isStory == 0) {
+					storyBook(story, hero);
+					time++;
+				} else {
+					time = theVillage(time, hero, relics, villageMonsters, villageChoices, villageTraps);
+				}
+			}
+			story.event7();
+			chill();
+			bossBattle(getBoss(story.getEventDecision(1), bosses), hero);
+			
+		}
 		
 	}
 	
-	public static int theCave (int time) {
-		while (time < 5) {
+	public static int theCave (int time, Player hero, ArrayList <Equipment> relics, ArrayList <Monster> caveMonsters,  ArrayList <Choice> caveChoices,  ArrayList <Trap> caveTraps) {
+		Random r = new Random();
+		int thisEvent = r.nextInt(12);
+		
+		if (thisEvent < 4)
+			battle(time, hero, caveMonsters);
+		else if (thisEvent < 8) 
+			trap(time, hero, caveTraps, relics);
+		else
+			choice(time, hero, caveChoices, relics);
 			
-		}
+		time++;
+		
 		return time;
 	}
 	
 	public static int theForest (int time, Player hero, ArrayList <Equipment> relics, ArrayList <Monster> forestMonsters,  ArrayList <Choice> forestChoices,  ArrayList <Trap> forestTraps) {
-		// choice(time, hero, forestChoices, relics);
-		// trap(time, hero, forestTraps, relics);
+		Random r = new Random();
+		int thisEvent = r.nextInt(12);
+		
+		if (thisEvent < 6)
+			battle(time, hero, forestMonsters);
+		else if (thisEvent < 9) 
+			trap(time, hero, forestTraps, relics);
+		else
+			choice(time, hero, forestChoices, relics);
+			
+		time++;
+		
+		return time;
+	}
+	
+	public static int theWasteland (int time, Player hero, ArrayList <Equipment> relics, ArrayList <Monster> wastelandMonsters,  ArrayList <Choice> wastelandChoices,  ArrayList <Trap> wastelandTraps) {
+		Random r = new Random();
+		int thisEvent = r.nextInt(12);
+		
+		if (thisEvent < 6)
+			battle(time, hero, wastelandMonsters);
+		else if (thisEvent < 9) 
+			trap(time, hero, wastelandTraps, relics);
+		else
+			choice(time, hero, wastelandChoices, relics);
+			
+		time++;
+		
+		return time;
+	}
+	
+	public static int theVillage (int time, Player hero, ArrayList <Equipment> relics, ArrayList <Monster> villageMonsters,  ArrayList <Choice> villageChoices,  ArrayList <Trap> villageTraps) {
+		Random r = new Random();
+		int thisEvent = r.nextInt(12);
+		
+		if (thisEvent < 6)
+			battle(time, hero, villageMonsters);
+		else if (thisEvent < 9) 
+			trap(time, hero, villageTraps, relics);
+		else
+			choice(time, hero, villageChoices, relics);
+			
+		time++;
+		
 		return time;
 	}
 	
@@ -152,14 +298,15 @@ public class GloryQuest {
 		Random r = new Random();
 		int thisChoice = r.nextInt(choices.size());
 		
-		int isReward = r.nextInt(4); // 1/4 chance to get reward from an event
-		if (isReward == 0) { 
+		int isReward = r.nextInt(3); // 1/3 chance to get NOT reward from an event
+		if (isReward > 0) { 
 			Reward tempReward = generateReward(time, relics);
 			choices.get(thisChoice).setReward(tempReward);
 		}
 		
 		choices.get(thisChoice).setPlayer(hero);
 		boolean temp = choices.get(thisChoice).userChoice();
+		chill();
 
 	}
 	
@@ -167,16 +314,98 @@ public class GloryQuest {
 		Random r = new Random();
 		int thisTrap = r.nextInt(traps.size());
 		
-		int isReward = r.nextInt(3); // 1/3 chance to get reward from an trap
-		if (isReward == 0) { 
+		int isReward = r.nextInt(4); // 1/4 chance to get NOT reward from an trap
+		if (isReward > 0) { 
 			Reward tempReward = generateReward(time, relics);
 			traps.get(thisTrap).setReward(tempReward);
 		}
 		
-		int disarmChance = r.nextInt(60 - ((time + 1) * 2)); // traps get harder to disarm as the game progresses!
+		int disarmChance = r.nextInt(75 - ((time + 1) * 2)); // traps get harder to disarm as the game progresses!
 		
 		traps.get(thisTrap).setPlayer(hero);
 		traps.get(thisTrap).disarm(disarmChance);
+		chill();
+	}
+	
+	public static void battle (int time, Player hero, ArrayList <Monster> monsters) {
+		Random r = new Random();
+		ArrayList <Monster> tempMonsters = new ArrayList <> ();
+		
+		for (int i = 0; i < monsters.size(); i++) {
+			if ((monsters.get(i).getDifficulty() > time - 1) && (monsters.get(i).getDifficulty() < time + 3)) {
+				Monster deepMonsterCopy = new Monster(monsters.get(i));
+				tempMonsters.add(deepMonsterCopy);
+			}
+		}
+		
+		
+		int thisMonster = r.nextInt(tempMonsters.size());
+		System.out.println("\nYou quickly raise your weapon: A " + tempMonsters.get(thisMonster).getName() + " stands in your path!");
+		Battles fight = new Battles();
+		int isDead = fight.battleMonster(tempMonsters.get(thisMonster), hero);
+		
+		if (isDead <= 0) { // replace later
+			System.out.println("You collapse to the ground. Your body, broken. Your mind, fading. As the " + tempMonsters.get(thisMonster).getName() + " looms over you, you feel yourself slipping away...");
+			System.out.println("Away...");
+			System.exit(0);
+		}
+		else
+			System.out.println("The " + tempMonsters.get(thisMonster).getName() + " defeated, you take a moment to rest and heal before continuing on your way.");
+			hero.heal();
+			chill();
+	}
+	
+	public static void bossBattle (Boss boss, Player hero) {
+		System.out.println("The air is still. You each stand your ground, daring the other to make the first move. In a flash, you both charge. This is it! The ultimate battle! The final challenge! The fight... for GLORY!");
+		Battles fight = new Battles();
+		
+		int isDead = fight.battleBoss(boss, hero);
+		
+		if (isDead <= 0) { // maybe add some more death dialouge?
+			System.out.print("You were so close! As the " + boss.getName() + " lunges for the finishing blow, you wonder what possessed you to go on a Quest for Glory.\nI mean, you wake up outside a cave, and your first thought is to find a horrific beast to fight to the death? I mean, really, what kind of person does that? These thoughts do little to soften the incoming coup de grace, though. \nYour final thought before going to the great beyond is:");
+			System.out.println(" I wonder what it will sound like?\n\n...crunch\n\nAfterwards, you are too busy being dead to wonder what part of your body being eviscerated made that noise.");
+			System.exit(0);
+		}
+		else
+			System.out.println("The " + boss.getName() + " lets out a final, agonized groan as you deliver the killing blow. You stand above your vanquished foe, and bask in your victory. This kill will surely bring you fame, fortune, and, most importantly...");
+			System.out.println("G L O R Y !");
+	}
+	
+	public static Boss getBoss (String location, ArrayList <Boss> bosses) {
+		Boss returnBoss = new Boss();
+		
+		for (int i = 0; i < bosses.size(); i++) {
+			if (location.equals(bosses.get(i).getLocation()))
+				returnBoss = new Boss(bosses.get(i));
+		}
+		
+		if (location.equals("cave"))
+			returnBoss.setDescription("A massive, floating eye, covered in flesh, eyestalks, and a mouth full of wicked teeth.");
+		else if (location.equals("forest"))
+			returnBoss.setDescription("A massive, winged lizard, with scales of green and a breath that could melt a man in seconds.");
+		else if (location.equals("wasteland"))
+			returnBoss.setDescription("A powerful wizard, so skilled and arrogant they have cheated death... at the cost of their own humanity.");
+		else if (location.equals("village"))
+			returnBoss.setDescription("BEEG ORK SMASHIN' PUUNEE HUMEES! WAAAAAAGH!");
+		
+		return returnBoss;
+	}
+	
+	public static void storyBook (Story story, Player hero) {
+		Random r = new Random();
+		int thisStory = r.nextInt(4);
+		
+		if (thisStory == 0)
+			story.event3(hero);
+		else if (thisStory == 1)
+			story.event4(hero);
+		else if (thisStory == 2)
+			story.event5(hero);
+		else if (thisStory == 3)
+			story.event6(hero);
+			
+		chill();
+			
 	}
 	
 	public static Reward generateReward (int time, ArrayList <Equipment> relics) {
@@ -184,13 +413,14 @@ public class GloryQuest {
 		ArrayList <Equipment> tempRelics = new ArrayList <> ();
 			
 		for (int i = 0; i < relics.size(); i++) {
-			tempRelics.add(relics.get(i));
+			Equipment deepEquipmentCopy = new Equipment(relics.get(i));
+			tempRelics.add(deepEquipmentCopy);
 		}
 			
 		Iterator <Equipment> it = tempRelics.iterator();
 		while (it.hasNext()) {
 			Equipment tempEquipment = it.next();
-			if ((tempEquipment.getRarity() < time - 1) || (tempEquipment.getRarity() > time + 1))
+			if ((tempEquipment.getRarity() < (time/2)) || (tempEquipment.getRarity() > (time/2) + 1)) // getting the a valid piece of equipment for the player
 				it.remove();
 		}
 			
@@ -198,6 +428,12 @@ public class GloryQuest {
 		Reward tempReward = new Reward(0, tempRelics.get(thisReward));
 		
 		return tempReward;
+	}
+	
+	public static void chill () {
+		Scanner s = new Scanner(System.in);
+		System.out.println("\tPress any key to continue...\n");
+		String breakTime = s.nextLine();
 	}
 
 }

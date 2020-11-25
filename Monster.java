@@ -50,6 +50,14 @@ public class Monster {
     public double getDodge(){
         return dodgeChance;
     }
+	
+	public int getDifficulty () {
+		return difficulty;
+	}
+	
+	public String getName(){
+        return name;
+    }
 
     public String toString(){
         return ("Monsters name: " + name + "\nDifficulty: " + difficulty + "\nHealth: " + health + "\nDamage: " + damage);

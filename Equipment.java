@@ -30,6 +30,13 @@ public class Equipment {
 	rarity = r;
  }
  
+ public Equipment(Equipment e) {
+	name = e.getName();
+	type = e.getType();
+	value = e.getValue();
+	rarity = e.getRarity();
+ }
+ 
  
  public String getName() {
 	return name;

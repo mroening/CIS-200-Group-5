@@ -13,7 +13,13 @@ public class Story {
 	private ArrayList<String> story = new ArrayList<>(7);
 	
 	public Story(String name) {
-		System.out.println("\n" + name + "'s Quest for Glory: " +
+		int i = 0;
+		while (i < 7) {
+			story.add("X");
+			i++;
+		}
+		
+		System.out.println(questForGlory(name) +
 					"\nYou awaken on the rocky ground in a dark forest near the entrance of a cave." + 
 					"\nYou feel a bump on your head and can't remember exactly what you were doing." +
 					"\nYou see a sword laying next to you and remember that you were on a quest." +
@@ -93,7 +99,7 @@ public class Story {
 			else if (answer.charAt(0) == 'V' || answer.charAt(0) == 'v') {
 				System.out.println("\nYou decide that the village is your best option. Chances are low that they will be hostile and" +
 									"\nthey may be able to help you find a monster to kill and complete your quest. Still, something" +
-									"\nSeems a little off about the village. Nonetheless your adventure towards it.");
+									"\nSeems a little off about the village. Nonetheless you adventure towards it.");
 				story.add(1, "village");
 			}
 			else {
@@ -114,7 +120,7 @@ public class Story {
 	
 	public void event2() {
 		if (story.get(1).equals("cave")) {
-			System.out.println("\nAs you wonder deeper into the cave you get the feeling that you are in the right place." +
+			System.out.println("\nAs you wander deeper into the cave you get the feeling that you are in the right place." +
 								"\nYou start to see lots of skeletons, some animal, some human. You think you must be in the right " +
 								"\nspot, and continue on");
 		}
@@ -304,7 +310,7 @@ public class Story {
 	
 	public void event5(Player p) {
 		if (story.get(1).equals("cave")) {
-			System.out.println("\nYou continue down the cave and to your surprise you see a wimpering coyote that has a leg stuck under a rock" +
+			System.out.println("\nYou continue down the cave and to your surprise you see a whimpering coyote that has a leg stuck under a rock" +
 								"\nWhile a little crazy, you are tempted to help the wild animal out from under the rock, do you help it?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
@@ -435,24 +441,24 @@ public class Story {
 		if (story.get(1).equals("cave")) {
 			System.out.println("\nYou continue through the cave and see a full set of chainmail armor that a small salamander has made its home." +
 								"\nYou know that chainmail is extremely tough.");
-			p.equipWeapon(new Equipment("Classic Chainmail", "armor", 15, 0));
+			p.equipArmor(new Equipment("Classic Chainmail", "armor", 15, 0));
 		}
 		else if (story.get(1).equals("wasteland")) {
 			System.out.println("\nWalking through this wasteland is the hardest task you ever remember completeing. The burnt forest is starting" +
 								"\nto drive you a bit nuts anything you come across that doesn't want to kill is a miracle. You see a skeleton in" +
 								"\nfront of your path wearing spiked metal armor that looks extremely solid.");
-			p.equipWeapon(new Equipment("The Defender", "armor", 15, 0));
+			p.equipArmor(new Equipment("The Defender", "armor", 15, 0));
 		}
 		else if (story.get(1).equals("forest")) {
 			System.out.println("\nThe strange animal tracks seem to go on forever, but while you are walking you come across a giant piece" +
 								"\nof bark that is cut in the shape of a shield. The shield looks very protective, but you know you won't be" +
 								"\nto carry the shield and carry the weight of your armor.");
-			p.equipWeapon(new Equipment("The Wooden Wall", "armor", 15, 0));
+			p.equipArmor(new Equipment("The Wooden Wall", "armor", 15, 0));
 		}
 		else if (story.get(1).equals("village")) {
 			System.out.println("\nContinuing through the village after some crazy encounters, you see a golden armor set through the window" +
 								"\nof a house, the door is completely open, but the armor is untouched.");
-			p.equipWeapon(new Equipment("The Golden Set", "armor", 15, 0));
+			p.equipArmor(new Equipment("The Golden Set", "armor", 15, 0));
 		}
 		else {
 			System.out.println("Something is wrong");
@@ -482,7 +488,7 @@ public class Story {
 		else if (story.get(1).equals("village")) {
 			System.out.println("\nYou reach the town hall where you can hear a lot of concerned chattering. You knew this village " +
 								"\ncouldn't be compeltely abandoned. Right as you walk up to front a giant ogre smashes through the" +
-								"\nfront door and let's out a roar! \"Fresh Meat!\" he says as you prepare your weapon. Seeing this, " +
+								"\nfront door and lets out a roar! \"Fresh Meat!\" he says as you prepare your weapon. Seeing this, " +
 								"makes you certain that this is what you're quested to kill");
 		}
 		else {
@@ -493,5 +499,12 @@ public class Story {
 	
 	public String getEventDecision(int n) {
 		return(story.get(n));
+	}
+	
+	public String questForGlory (String n) {
+		return "\n************************************************************\n\n\t\t" +
+			   n.toUpperCase() + "'S QUEST FOR GLORY!\n\n" +
+			   "************************************************************\n";
+				
 	}
 }

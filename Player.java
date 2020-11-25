@@ -39,6 +39,7 @@ public class Player {
  public Player(String n) {
 	name = n;
 	health = DEFAULT_HEALTH;
+	maxHealth = DEFAULT_HEALTH;
 	dmg = DEFAULT_DMG;
 	healthEquipment = new Equipment("Leather Patchwork","armor",0,0);
 	dmgEquipment = new Equipment("Rusty Sword","weapon",0,0);
@@ -108,7 +109,7 @@ public void equipArmor(Equipment e) {
  public void heal() {
 	 health = maxHealth;
  }
- public void takeDamage(int damage) {
+ public void takeDamage(int damage) { // for traps
 	System.out.println("You took "+damage+" damage!");
 	if (health - damage < 1)
 		health = 1;
@@ -116,6 +117,10 @@ public void equipArmor(Equipment e) {
 		health -= damage;
 	
  }
+ 
+ public void setHealth(int h){ // for fights
+        health = h;
+    }
  
  public void setMaxHealth() {
 	maxHealth = DEFAULT_HEALTH + healthBuff + healthEquipment.getValue();
