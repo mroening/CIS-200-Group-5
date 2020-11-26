@@ -79,11 +79,12 @@ public class Story {
 		}
 		else if (story.get(0).equals("forest")) {
 			System.out.println("\nAfter a few strange encounters in the forest, you see a clearing with a village in the distance." + 
+								"\nSmall plumes of smoke rise from the village, and, from a distance, you see villagefolk flit between the houses." +
 								"\nStill unable to remember anything except your desire to complete your quest, you are not sure if" + 
-								"\nthe village has anything to do with your quest. However, you are certain that this village is not" +
-								"\nyour home, something seems off about the village. Maybe they will be able to help you on your quest." +
-								"\nOr maybe the village is not very welcoming to strangers such as yourself. The village " +
-								"\nis probably unnecessary to complete your quest so that leaves you with an important decision once again." +
+								"\nthe village has anything to do with your mission. While you are certain that this village is not" +
+								"\nyour home, maybe they will be able to help you on your quest. A few screams rise from the village." +
+								"\n...maybe the village is not very welcoming to strangers such as yourself. The village " +
+								"\nis probably unnecessary to complete your quest anyways. That still leaves you with an important decision once again:" +
 								"\nDo you go deeper into the forest or towards the village in the distance?");
 			System.out.print("\n'(D)eeper' or '(V)illage': ");
 			String answer = s.nextLine();
@@ -92,14 +93,14 @@ public class Story {
 			answer = "Zoinks!";
 			
 			if (answer.charAt(0) == 'D' || answer.charAt(0) == 'd') {
-				System.out.println("\nYou decide to continue deeper into the forest, thinking that entering a random village" +
-									"\ncould be dangerous and it almost certainly isn't the right way to go to complete your quest."); 
+				System.out.println("\nYou decide to continue deeper into the forest, thinking that entering some random, screaming, village" +
+									"\ncould be dangerous, and it almost certainly isn't the right way to go to complete your quest."); 
 				story.add(1, "forest");
 			}
 			else if (answer.charAt(0) == 'V' || answer.charAt(0) == 'v') {
 				System.out.println("\nYou decide that the village is your best option. Chances are low that they will be hostile and" +
 									"\nthey may be able to help you find a monster to kill and complete your quest. Still, something" +
-									"\nSeems a little off about the village. Nonetheless you adventure towards it.");
+									"\nseems a little off about the village. Are those screams getting louder? Nonetheless you adventure towards it.");
 				story.add(1, "village");
 			}
 			else {
@@ -121,26 +122,26 @@ public class Story {
 	public void event2() {
 		if (story.get(1).equals("cave")) {
 			System.out.println("\nAs you wander deeper into the cave you get the feeling that you are in the right place." +
-								"\nYou start to see lots of skeletons, some animal, some human. You think you must be in the right " +
-								"\nspot, and continue on");
+								"\nYou start to see lots of skeletons, some animal, some human. Skeletons mean monsters! You" +
+								"\nfigure that you must be in the right spot, and continue on");
 		}
 		else if (story.get(1).equals("wasteland")) {
 			System.out.println("\nYou have reached the end of the tunnel and are once again outside, but you can't tell how much time" + 
-								"\nhas passed because it is dark and cloudy all around you. You can only see dead ashen trees and no sign" +
-								"\nof any lifeforms. You must be in the right place! Whatever has created this place is definitely what" +
+								"\nhas passed! Dark clouds and fog all around you block the sun. You can only see dead ashen trees and no sign" +
+								"\nof any life. Perfect! You must be in the right place! Whatever has created this place is definitely what" +
 								"\nyou have been tasked to stop.");
 		}
 		else if (story.get(1).equals("forest")) {
-			System.out.println("The forest seems to go on forever, with nothing redeeming in sight you are not quite sure you are anywhere" + 
-								"\nnear where you are supposed to be. As you look around, you notice a humongous egg that has been cracked open." +
-								"\nJust as you were losing hope you know that whatever laid that egg must be what you are tasked to defeat." +
-								"\nYou continue towards the egg and follow big strangely shaped animal tracks deeper into the forest.");
+			System.out.println("The forest seems to go on forever, with nothing redeeming in sight! You are not quite sure you are anywhere" + 
+								"\nnear where you are supposed to be, or indeed, anywhere at all! As walk into a clearing, you notice a humongous egg that has been cracked open." +
+								"\nJust as you were losing hope! You know that whatever laid that egg must be what you are tasked to defeat." +
+								"\nYou continue towards the egg. As you inspect the egg, you find some big, strangely shaped animal tracks! You follow them deeper into the forest.");
 		}
 		else if (story.get(1).equals("village")) {
-			System.out.println("\nYou finally arrive at what seems to be a deserted village, overrun with forest animals." +
-								"\nThere must be a reason this village is deserted, maybe the monster you are tasked to defeat" +
-								"\nhas already reigned terror over this village. Whatever caused this, you have tasked yourself to" +
-								"\nfind and defeat as your new quest.");
+			System.out.println("\nYou finally arrive at what seems to be a deserted village. As you take a closer look," +
+								"\nit seems to have been the target of some sort of attack! You duck behind a building as a patrol of" +
+								"\norcs swings around the corner. As they leave, you take another look at the village. You see a mix of" +
+								"\nabandoned homes and makeshift orc camps. You decide to find the leader of this attack, end their life, and liberate this village!");
 		}
 		else {
 			System.out.println("Something is wrong");
@@ -153,10 +154,10 @@ public class Story {
 	
 	public void event3(Player p) {
 		if (story.get(1).equals("cave")) {
-			System.out.println("\nAs you continue through the cave you see something...wait someone that is stuck in a spider web." +
-								"\nTo your surprise the person is alive and upon seeing you begs for your help. Being the hero that" +
+			System.out.println("\nAs you continue through the cave you see something...wait, is that someone stuck in a spider web?" +
+								"\nIt is! To your surprise the person is alive and, upon seeing you, begs for your help. Being the hero" +
 								"\nthat you are, you should definitely save him, right? On the other hand if you save him, the spider" +
-								"\nthat has been fattening him up will not be too happy. Do you want to save him? ");
+								"\nthat has been fattening him up will NOT be happy. Do you want to save him? ");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
 			
@@ -164,7 +165,7 @@ public class Story {
 			answer = "Zoinks!";
 			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
-				System.out.println("\nYou cut the man from the webs and he explains to you that he too was on an adventure. He teaches you" +
+				System.out.println("\nYou cut the man from the webs and he explains to you that he too was on an adventure! He teaches you" +
 									"\nhis fighting tricks and helps increase your ability to fight.");
 				//gives 3 damage
 				p.addDamage(3);
@@ -182,11 +183,11 @@ public class Story {
 		}
 		
 		else if (story.get(1).equals("wasteland")) {
-			System.out.println("\nJust as you were thinking that the fog and the ashen forest seem to go on forever with nothing promising in" +
-								"\nsight you hear something. It is a man laying against one of the many black trees begging for help! " +
-								"\nAs you get closer you see that half of the man's face seems to be decaying away like a zombie!. Still, he asks " +
-								"\nfor you to give him a hand and he'll be forever in yo.... his words start to trail off" +
-								"\nyou can tell that the man is in desperate need of assistance! Do you help the man?");
+			System.out.println("\nJust as you were thinking that this fog and the ashen forest seem to go on forever with nothing promising in" +
+								"\nsight, you hear something. It is a man! He is laying against one of the many black trees, begging for help! " +
+								"\nAs you get closer you see that half of the man's face seems to be decaying away like a zombie! Yuck. Still, he asks " +
+								"\nfor you to give him a hand and he'll be forever in yo.u....r... Hrmm. His words are starting to trail off." +
+								"\nYou can tell that the man is in desperate need of assistance! Do you help the man?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
 			
@@ -194,9 +195,9 @@ public class Story {
 			answer = "Zoinks!";
 			
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
-				System.out.println("\nRight as you touch the man's shoulder to help him up you wince in pain as if the man has stung you!" +
-									"\nThe man is cursed and your body seems to be starting to become part undead! In your new half " +
-									"\nman, half-undead body you feel more weaker, but your body will be able to withstand more blows." +
+				System.out.println("\nRight as you touch the man's shoulder to help him up you wince in pain, as if the man has stung you!" +
+									"\nThe man is cursed, and now YOUR body seems to be starting to become part undead! In your new half-man, " +
+									"\nhalf-undead body you feel weaker, but your body will be able to withstand more blows." +
 									"\nThe man is still limp and you decide that it is best you leave him to rest.");
 				//gives 5 max health and subtracts 1 damage
 				p.addMaxHealth(5);
@@ -241,7 +242,7 @@ public class Story {
 		}
 		
 		else if (story.get(1).equals("village")) {
-			System.out.println("\nAs you continue through the deserted village, you hear a faint sound coming from a nearby house." +
+			System.out.println("\nAs you continue through the village, you hear a faint sound coming from a nearby house." +
 								"\nYou get closer and hear a child crying inside. Do you enter the house?" );
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
@@ -252,7 +253,7 @@ public class Story {
 			if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 				System.out.println("\nYou enter the house and the child goes silent in fear. You look around until you find the child" +
 									"\nhuddled into a corner. You assure the child you will not hurt him and he seems comforted to see" +
-									"\nanother human. You say you are on a quest to kill a monster and he gets excited offering you food." +
+									"\nanother human. You say you are on a quest to save the village, and he gets excited, offering you food." +
 									"\nThe young child doesn't talk, but you accept the delicious and filling food and he wishes you luck.");
 				//Gives 4 max health
 				p.addMaxHealth(4);
@@ -260,12 +261,12 @@ public class Story {
 				story.add(2, "save");
 			}
 			else if (answer.charAt(0) == 'N' || answer.charAt(0) == 'n') {
-				System.out.println("\nYou decide to let the child be and focus on completeing your quest, you can't be going into random houses.");
+				System.out.println("\nYou decide to let the child be and focus on completeing your quest, you can't be going into random houses, saving random children. That would be madeness!");
 				story.add(2, "pass");
 			}
 			else {
 				System.out.println("\nYou sit to ponder this decision for a while and fall asleep. When you wake up you can't remember " +
-									"\nwhat you were doing so you move on continuing your quest.");
+									"\nwhat you were doing, so you move on continuing your quest. Was the door to that house always broken down?");
 				story.add(2, "pass");
 			}
 		}
@@ -294,8 +295,8 @@ public class Story {
 			p.equipWeapon(new Equipment("Sword in the Stone", "weapon", 8, 0));
 		}
 		else if (story.get(1).equals("village")) {
-			System.out.println("\nAs you are walking through the village you see a blacksmith totally abandoned like all of the other buildings." +
-								"\nWhile all the weapons seem to be taken from the racks there is one weapon, a giant mace sitting untouched.");
+			System.out.println("\nAs you are walking through the village you see a blacksmith's shop! It seems ransacked, like all of the other buildings." +
+								"\nHowever, while all the weapons seem to have been taken from the racks, you see one weapon, a giant mace, sitting untouched.");
 			p.equipWeapon(new Equipment("Mace Wind-You", "weapon", 8, 0));
 		}
 		else {
@@ -401,7 +402,7 @@ public class Story {
 		}
 		else if (story.get(1).equals("village")) {
 			System.out.println("\nYou hear your stomach growl and look around the village for something to eat. You see a house with a feast" +
-								"\nhalf-eaten unfortunately some raccoons are completely hogging the food and seem very aggressive about eating it." +
+								"\nhalf-eaten! And no goblins in sight! Unfortunately some raccoons are completely hogging the food and seem very aggressive about eating it." +
 								"\nDo you share with the raccoons?");
 			System.out.print("\n'(Y)es' or '(N)o': ");
 			String answer = s.nextLine();
@@ -424,7 +425,7 @@ public class Story {
 			}
 			else {
 				System.out.println("\nSince your head must still be hurting due to your inability to make a binary decision you decide a nap is better." +
-									"\nWhen you wake up, all the food is eaten so you continue on your way");
+									"\nWhen you wake up, all the food is eaten so you continue on your way.");
 				story.add(3, "leave");
 			}
 		}
@@ -457,7 +458,7 @@ public class Story {
 		}
 		else if (story.get(1).equals("village")) {
 			System.out.println("\nContinuing through the village after some crazy encounters, you see a golden armor set through the window" +
-								"\nof a house, the door is completely open, but the armor is untouched.");
+								"\nof a house, the door is completely open, but the armor is untouched. Weird.");
 			p.equipArmor(new Equipment("The Golden Set", "armor", 15, 0));
 		}
 		else {
@@ -486,10 +487,10 @@ public class Story {
 								"\nthis is what you're quested to kill");
 		}
 		else if (story.get(1).equals("village")) {
-			System.out.println("\nYou reach the town hall where you can hear a lot of concerned chattering. You knew this village " +
-								"\ncouldn't be compeltely abandoned. Right as you walk up to front a giant ogre smashes through the" +
+			System.out.println("\nYou reach the town hall where you can hear a lot of concerned chattering. Maybe this is where " +
+								"\ncthe townsfolk are being kept! Right as you walk up to building, a GIANT ogre smashes through the" +
 								"\nfront door and lets out a roar! \"Fresh Meat!\" he says as you prepare your weapon. Seeing this, " +
-								"makes you certain that this is what you're quested to kill");
+								"you steel yourself, and prepare to liberate the village.");
 		}
 		else {
 			System.out.println("Something is wrong");

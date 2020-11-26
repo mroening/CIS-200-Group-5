@@ -8,11 +8,11 @@ public class GloryQuest {
 		
 		System.out.print("Welcome to GLORYQUEST! Type (P)lay to play GLORYQUEST, or type (D)ev to enter Developer mode: ");
 		String titleString = s.nextLine().toLowerCase();
+		if (titleString.equals(""))
+			titleString = "Zoinks!";
 		char titleChoice = titleString.charAt(0);
 		
-		if (titleString.equals("dennis")) {
-			System.out.println("Dennis");
-		} else if (titleChoice == 'd') {
+		if (titleChoice == 'd') {
 			try {
 				Input devMode = new Input();
 				devMode.createNewThing();
@@ -22,7 +22,8 @@ public class GloryQuest {
 		} else if (titleChoice == 'p') {
 			playGame();
 		} else {
-			System.out.println("You think you're a funny man, dont'cha? A real razzle-dazzler! Why don't you go try to impress a Commadore, you fish-lipped clown college drop-out.");
+			System.out.println("You think you're a funny man, dont'cha? A real razzle-dazzler! Why don't you go impress some goblins in GloryQuest, you clown.");
+			playGame();
 		}
 		
 	}
@@ -137,6 +138,14 @@ public class GloryQuest {
 		System.out.println("\nIt's dark. It hurts. Your head swims, and your vision comes in and out of focus. You try to focus on something... your name! You must have a name...");
 		System.out.print("But what was it? (Enter your name here): ");
 		String name = s.nextLine();
+		
+		if (name.equals("")) {
+			name = nullName();
+		} else if (name.equalsIgnoreCase("dennis")) {
+			dennisQuest();
+			name = nullName();
+		}
+		
 		System.out.println("Of course! " + name + "! Now sit back, relax, and get comfy! You're about to embark on...");
 		
 		Player hero = new Player(name);
@@ -386,7 +395,7 @@ public class GloryQuest {
 		else if (location.equals("wasteland"))
 			returnBoss.setDescription("A powerful wizard, so skilled and arrogant they have cheated death... at the cost of their own humanity.");
 		else if (location.equals("village"))
-			returnBoss.setDescription("BEEG ORK SMASHIN' PUUNEE HUMEES! WAAAAAAGH!");
+			returnBoss.setDescription("BEEG OGRE SMASHIN' PUUNEE HUMEES! WAAAAAAGH!");
 		
 		return returnBoss;
 	}
@@ -434,6 +443,80 @@ public class GloryQuest {
 		Scanner s = new Scanner(System.in);
 		System.out.println("\tPress any key to continue...\n");
 		String breakTime = s.nextLine();
+	}
+	
+	public static String nullName () {
+		Random r = new Random();
+		int funnyName = r.nextInt(10);
+		
+		System.out.println("Ooh, you must really not be feeling so well. It's alright! If you don't remember your name, I'll come up with one for you. Now, what should your name be...");
+		if (funnyName == 0)
+			return "Dumpus";
+		else if (funnyName == 1)
+			return "Rumblebumbus";
+		else if (funnyName == 2)
+			return "Dinkywinkle";
+		else if (funnyName == 3)
+			return "Billy the Fool, Lord of the Pigsty";
+		else if (funnyName == 4)
+			return "A Rat. You are just a rat.";
+		else if (funnyName == 5)
+			return "John Smith";
+		else if (funnyName == 6)
+			return "uh... sorry, I forgot";
+		else if (funnyName == 7)
+			return "A Cardboard Cutout of the Kool-Aid Man";
+		else if (funnyName == 8)
+			return "Gumby";
+		else
+			return "you";
+		
+	}
+	
+	public static void dennisQuest () {
+		Scanner s = new Scanner(System.in);
+		Player dennis = new Player("Dennis");
+		dennis.addMaxHealth(100);
+		dennis.addDamage(100);
+		dennis.heal();
+		
+		System.out.println("\nYou stand in the middle of an ocean of conquest. Foes lie defeated all around." +
+						   "\nYou have done it. You have glory! Glory! GLORY! YES! AHAHAHAHHAAAHAHAHAHHAHAHAahaa..." +
+						   "\nWait. What is that? From the ground, a lone man rises. He raises his sword in silent challenge." +
+						   "\nOne. More. One more conquest, and then you will have all the GLORY you could ever want. Glory. Glory! GLORY!!!!!!");
+		chill();
+		
+		Boss dennisBoss = new Boss("Dennis", 1000, 25, "Joshua Weese", 11);
+		dennisBoss.setDescription("GLORY!! GLORY! GLORY!!! GLORY! GLORY!!!!!");
+		
+		Battles dennisFight = new Battles();
+		int isDead = dennisFight.battleBoss(dennisBoss, dennis);
+		
+		if (isDead <= 0) {
+			System.out.print("No! Impossible! The... the glory! Glory! GLORY! The lone swordsman watches as the life drains from your eyes. He shakes his head," +
+							 "\nand picks you up. Time passes. Mountains, deserts, oceans and plains pass by in a haze. Finally, you enter into a familiar forest." +
+							 "\nYou finally stop, and your body falls to the ground. You see the man put a shoddy sword on the ground next to you. He takes a final look" +
+							 "\nat you before walking back into the forest. As you lie there, you notice a cave in front of you. Then, a sudden pain fills your head, and everything goes black.");
+							 chill();
+		}
+		else {
+			System.out.println("The swordsman crumples in the face of your overwhelming might. He is defeated! Just like all the others!" +
+							   " Yes! YES! You have done it! You are the most glorious! GLORIOUS! GLORY! GLORY! HAHAHAAAHAHAHAHAHAHAHAHAAAA!" +
+							   "EVERYTHING IS GLORY! YOU ARE GLORY! GLORY!");
+			String wait = s.nextLine();
+			System.out.println("GLORY!");
+			wait = s.nextLine();
+			System.out.println("GLORY!");
+			wait = s.nextLine();
+			
+			int i = 0;
+			while (i < 100000) {
+				System.out.print("GLORY");
+				i++;
+			}
+		
+			System.exit(0);
+		}
 	}
 
 }

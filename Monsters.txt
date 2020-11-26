@@ -10,7 +10,7 @@ cave:25:10:Floating Eyeball:9
 cave:40:5:The Shadows:10
 forest:6:2:Wolf:1
 forest:2:6:Garden Snake:1
-forest:16:2:Man-Eating Plant:2
+forest:16:1:Man-Eating Plant:2
 forest:9:4:Satyr:3
 forest:9:16:Owlbear:4
 forest:16:9:Bearowl:5
