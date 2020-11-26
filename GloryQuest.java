@@ -4,9 +4,18 @@ import java.io.*;
 public class GloryQuest {
 	
 	public static void main(String[] args) throws IOException {
+		boolean dead = false;
+		mainMenu(dead);
+	}
+	
+	public static void mainMenu (boolean dead) throws IOException {
 		Scanner s = new Scanner(System.in);
 		
-		System.out.print("Welcome to GLORYQUEST! Type (P)lay to play GLORYQUEST, or type (D)ev to enter Developer mode: ");
+		if (dead == false) 
+			System.out.print("\nWelcome to GLORYQUEST! Type (P)lay to play GLORYQUEST, type (D)ev to enter Developer mode, or (Q)uit to exit GloryQuest: ");
+		else	
+			System.out.print("\nOoh, that looked pretty bad! If you'd like to try again, type (P)lay! If you'd like to inflict misery on others, type (D)ev!\nOr, if you need some time to recover from getting flattened, you can type (Q)uit to quit. So, what'll it be, champ? ");
+			
 		String titleString = s.nextLine().toLowerCase();
 		if (titleString.equals(""))
 			titleString = "Zoinks!";
@@ -21,13 +30,13 @@ public class GloryQuest {
 			}
 		} else if (titleChoice == 'p') {
 			playGame();
+		} else if (titleChoice == 'q') {
+			System.exit(0);
 		} else {
 			System.out.println("You think you're a funny man, dont'cha? A real razzle-dazzler! Why don't you go impress some goblins in GloryQuest, you clown.");
 			playGame();
 		}
-		
 	}
-	
 	public static void playGame () throws IOException {
 		Random r = new Random();
 		
@@ -147,6 +156,7 @@ public class GloryQuest {
 		}
 		
 		System.out.println("Of course! " + name + "! Now sit back, relax, and get comfy! You're about to embark on...");
+		String wait = s.nextLine();
 		
 		Player hero = new Player(name);
 		Story story = new Story(name); // The Quest Begins!
@@ -356,7 +366,13 @@ public class GloryQuest {
 		if (isDead <= 0) { // replace later
 			System.out.println("You collapse to the ground. Your body, broken. Your mind, fading. As the " + tempMonsters.get(thisMonster).getName() + " looms over you, you feel yourself slipping away...");
 			System.out.println("Away...");
-			System.exit(0);
+			try {
+				boolean dead = true;
+				mainMenu(dead);
+			} catch (IOException x) {
+				System.out.println("Wow! You died so hard, you broke the game! Congrats? You might want to check your installation, and then restart the game.");
+				System.exit(1);
+			}
 		}
 		else
 			System.out.println("The " + tempMonsters.get(thisMonster).getName() + " defeated, you take a moment to rest and heal before continuing on your way.");
@@ -373,7 +389,13 @@ public class GloryQuest {
 		if (isDead <= 0) { // maybe add some more death dialouge?
 			System.out.print("You were so close! As the " + boss.getName() + " lunges for the finishing blow, you wonder what possessed you to go on a Quest for Glory.\nI mean, you wake up outside a cave, and your first thought is to find a horrific beast to fight to the death? I mean, really, what kind of person does that? These thoughts do little to soften the incoming coup de grace, though. \nYour final thought before going to the great beyond is:");
 			System.out.println(" I wonder what it will sound like?\n\n...crunch\n\nAfterwards, you are too busy being dead to wonder what part of your body being eviscerated made that noise.");
-			System.exit(0);
+			try {
+				boolean dead = true;
+				mainMenu(dead);
+			} catch (IOException x) {
+				System.out.println("Wow! You died so hard, you broke the game! Congrats? You might want to check your installation, and then restart the game.");
+				System.exit(1);
+			}
 		}
 		else
 			System.out.println("The " + boss.getName() + " lets out a final, agonized groan as you deliver the killing blow. You stand above your vanquished foe, and bask in your victory. This kill will surely bring you fame, fortune, and, most importantly...");
@@ -446,10 +468,12 @@ public class GloryQuest {
 	}
 	
 	public static String nullName () {
+		Scanner s = new Scanner(System.in);
 		Random r = new Random();
 		int funnyName = r.nextInt(10);
 		
 		System.out.println("Ooh, you must really not be feeling so well. It's alright! If you don't remember your name, I'll come up with one for you. Now, what should your name be...");
+		String wait = s.nextLine();
 		if (funnyName == 0)
 			return "Dumpus";
 		else if (funnyName == 1)
@@ -459,15 +483,15 @@ public class GloryQuest {
 		else if (funnyName == 3)
 			return "Billy the Fool, Lord of the Pigsty";
 		else if (funnyName == 4)
-			return "A Rat. You are just a rat.";
+			return "A Rat. You are just a rat";
 		else if (funnyName == 5)
-			return "John Smith";
+			return "Alexander the Not-So-Great";
 		else if (funnyName == 6)
 			return "uh... sorry, I forgot";
 		else if (funnyName == 7)
 			return "A Cardboard Cutout of the Kool-Aid Man";
 		else if (funnyName == 8)
-			return "Gumby";
+			return "One of the Teletubbies";
 		else
 			return "you";
 		

@@ -19,8 +19,10 @@ public class Story {
 			i++;
 		}
 		
-		System.out.println(questForGlory(name) +
-					"\nYou awaken on the rocky ground in a dark forest near the entrance of a cave." + 
+		System.out.println(questForGlory(name));
+		String wait = s.nextLine();
+		
+		System.out.println("\nYou awaken on the rocky ground in a dark forest near the entrance of a cave." + 
 					"\nYou feel a bump on your head and can't remember exactly what you were doing." +
 					"\nYou see a sword laying next to you and remember that you were on a quest." +
 					"\nA quest to defeat one of the many monsters of this world. Unfortunately, you" +

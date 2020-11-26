@@ -31,7 +31,7 @@ public class Trap extends Event{
 		System.out.println(description);
 		Random rand = new Random();
 		int a = rand.nextInt(100+1);
-		System.out.println("Your senses flare! Something is amiss. Do you choose to:\n\tA: Play it safe!\n\t\tor\n\tB: Try to avoid the threat!");
+		System.out.println("Your senses flare! Something is amiss. Do you choose to:\n\tA: Play it safe!\n\t\tor\n\tB: Go for it!");
 		String reply = s.nextLine();
 		
 		if(reply.equalsIgnoreCase("a")) {
