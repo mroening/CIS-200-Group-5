@@ -1,6 +1,6 @@
 cave:5:1:Menacing Rock:1
 cave:6:2:Troglodyte:2
-cave:18:3:Corrupted Dwarf:3
+cave:14:1:Corrupted Dwarf:3
 cave:4:8:Bat-Sized Man:4
 cave:5:9:Goblin Rogue:5
 cave:14:5:Basalisk:6
