@@ -1,7 +1,9 @@
-/**Boss
+/**Boss.java
  * This class is used for creating the Boss objects, and holds methods for getting/setting specific values. 
  * It extends off of the monster class.
  * 
+ * @author Gibson Williams
+ * Scholars
  */
 public class Boss extends Monster
 {

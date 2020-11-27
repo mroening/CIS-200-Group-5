@@ -1,6 +1,8 @@
 /**Monster
  * This class is used for creating the Monster objects, and holds methods for getting/setting specific values.
  * 
+ * @author Gibson Williams
+ * Scholars
  */
 public class Monster {
     protected int health;

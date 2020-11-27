@@ -5,6 +5,8 @@ import java.util.*;
  * used for the combat system.
  * It also holds methods for inputting your choice of what you do during battle and so on.
  * 
+ * @author Gibson Williams
+ * Scholars
  */
 public class Battles{
     private boolean battleOver = false; //Loop conditional for fights
