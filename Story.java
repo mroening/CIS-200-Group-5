@@ -1,7 +1,14 @@
 /* Trent Powell- Group 5 Final Proj. (Story Class)
 * CIS 200/ Scholars Section
 * 
-* _________________________________________________
+* While this class took a long time to complete and is very long in length, it is an extremely simple class
+* to understand from a coding perspective. The class creates an object called story to easily separate each
+* story event from the main method. In the constructor, it fills an ArrayList with the set size of 7 with Strings
+* and promps the user with the title of the game and the hero's first decision, based on the decision. The 
+* ArrayList is filled with the corresponding string. This is all done with a simple scanner and if-then-else
+* statements. There are then 7 more events with choices based on the first couple choices made. Finally,
+* there is a method that prints the title with the player's inputted name and a method that gets the 
+* decision the player made in a specific event decision.
 */
 
 import java.util.*;
@@ -12,6 +19,11 @@ public class Story {
 	private Scanner s = new Scanner(System.in);
 	private ArrayList<String> story = new ArrayList<>(7);
 	
+	/** Story
+	* (This is a constructor that sets up the plot adding the first setting to the story ArrayList after the player makes that decision from a scanner object)
+	* 
+	* @param (The player's name is taken as a string so that it can be passed into another function that prints the title)
+	*/
 	public Story(String name) {
 		int i = 0;
 		while (i < 7) {
@@ -50,7 +62,10 @@ public class Story {
 	}
 //**********************************************************************************************************************************************
 	
-	
+	/** event1
+	* (This is the first event method to be called. It tests which option was first put into the ArrayList to see which question to ask to add another new setting to the ArrayList)
+	* 
+	*/
 	public void event1() {
 		if (story.get(0).equals("cave")) {
 			System.out.println("Far into the cave at this point, you see two intersecting paths." + 
@@ -120,7 +135,10 @@ public class Story {
 	
 	
 	
-	
+	/** event2
+	* (This is story event 2 method which is based on the previous decision and furthers the plot)
+	* 
+	*/
 	public void event2() {
 		if (story.get(1).equals("cave")) {
 			System.out.println("\nAs you wander deeper into the cave you get the feeling that you are in the right place." +
@@ -153,7 +171,12 @@ public class Story {
 
 	
 	
-	
+	/** event3
+	* (This is story event 3 which is again, based on the event 2's choice of setting. All story events from now on will be based on that choice. 
+	* This one takes in the player as a parameter and depending on the choice, the player may be affected positively or negatively.)
+	* 
+	* @param (Passes in the player object)
+	*/
 	public void event3(Player p) {
 		if (story.get(1).equals("cave")) {
 			System.out.println("\nAs you continue through the cave you see something...wait, is that someone stuck in a spider web?" +
@@ -279,7 +302,12 @@ public class Story {
 //**********************************************************************************************************************************************
 	
 	
-	
+	/** event4
+	* (This is again a choice based on event 2's choice of setting. It promps the player with finding a weapon which is an equipment object. 
+	* It asks them if they want to equip it by using the equipWeapon method in the player class.)
+	* 
+	* @param (Passes in the player object)
+	*/
 	public void event4(Player p) {
 		if (story.get(1).equals("cave")) {
 			System.out.println("\nYou can tell that more awaits you in this cave and as you are continuing your adventure, a large bow" +
@@ -310,7 +338,11 @@ public class Story {
 	
 	
 	
-	
+	/** event5
+	* (This event is again just if-then statements that prompt the user to make a choice and based on that choice, the player's stats could be affected.)
+	* 
+	* @param (Passes in the player object)
+	*/
 	public void event5(Player p) {
 		if (story.get(1).equals("cave")) {
 			System.out.println("\nYou continue down the cave and to your surprise you see a whimpering coyote that has a leg stuck under a rock" +
@@ -439,7 +471,12 @@ public class Story {
 	
 	
 	
-	
+	/** event6
+	* (Again, the user is prompted with an event in which they find some armor. They are prompted with the decision of whehter they want to switch
+	* using the equipArmor event in the player class. The armor is different based on the setting picked in event 2.)
+	* 
+	* @param (Passes in the player object)
+	*/
 	public void event6(Player p) {
 		if (story.get(1).equals("cave")) {
 			System.out.println("\nYou continue through the cave and see a full set of chainmail armor that a small salamander has made its home." +
@@ -470,7 +507,10 @@ public class Story {
 //**********************************************************************************************************************************************
 	
 	
-	
+	/** event7
+	* (This is the final story event, it introduces the boss, each setting has its own boss so it prints out the story for it based on the location.)
+	* 
+	*/
 	public void event7() {
 		if (story.get(1).equals("cave")) {
 			System.out.println("\nYou have reached the end of the line, what lies in front of you is a monster worthy of your killing" +
@@ -490,7 +530,7 @@ public class Story {
 		}
 		else if (story.get(1).equals("village")) {
 			System.out.println("\nYou reach the town hall where you can hear a lot of concerned chattering. Maybe this is where " +
-								"\ncthe townsfolk are being kept! Right as you walk up to building, a GIANT ogre smashes through the" +
+								"\nthe townsfolk are being kept! Right as you walk up to building, a GIANT ogre smashes through the" +
 								"\nfront door and lets out a roar! \"Fresh Meat!\" he says as you prepare your weapon. Seeing this, " +
 								"you steel yourself, and prepare to liberate the village.");
 		}
@@ -499,11 +539,23 @@ public class Story {
 		}
 	}
 //**********************************************************************************************************************************************
-	
+	/** getEventDecision
+	* (This method takes in an event number and searches the array list for the string stored at that specific spot to represent the event.)
+	* 
+	* @param (Takes in an integer to get that specific event decision)
+	* @return (Returns the string that represents the decision made for the inputted event number)
+	*/
 	public String getEventDecision(int n) {
 		return(story.get(n));
 	}
 	
+//**********************************************************************************************************************************************
+	/** questForGlory
+	* (This is the method to print the title of the game with the user's inputted name)
+	* 
+	* @param (Takes in the player's name as a string)
+	* @return (Returns a string to be printed in the first method)
+	*/
 	public String questForGlory (String n) {
 		return "\n************************************************************\n\n\t\t" +
 			   n.toUpperCase() + "'S QUEST FOR GLORY!\n\n" +
