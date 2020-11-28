@@ -32,7 +32,8 @@ public class Story {
 		}
 		
 		System.out.println(questForGlory(name));
-		String wait = s.nextLine();
+		System.out.println("\tPress any key to begin...\n");
+		String breakTime = s.nextLine();
 		
 		System.out.println("\nYou awaken on the rocky ground in a dark forest near the entrance of a cave." + 
 					"\nYou feel a bump on your head and can't remember exactly what you were doing." +
