@@ -21,7 +21,7 @@ public class Player {
  private int dmg;
  private Equipment healthEquipment;
  private Equipment dmgEquipment;
- //Gold is a variable that currently does nothing we had plans if we got to it, but didn't
+ //Gold is a variable that currently does nothing. We had plans if we got to it, but prioritized other things
  private int gold;
  protected Scanner s;
  private int healthBuff = 0;
@@ -105,6 +105,10 @@ public void equipArmor(Equipment e) {
 	System.out.println("\nThe new equipment you found is: \n" + e);
 	System.out.print("Would you like to switch? (Y)es or (N)o: ");
 	String answer = s.nextLine();
+	
+	if (answer.equals("")) // stops the program from crashing if the player fails to input anything
+			answer = "Zoinks!";
+			
 	if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 		healthEquipment = e;
 		System.out.println("You equipped it!\n");
@@ -123,6 +127,10 @@ public void equipArmor(Equipment e) {
 	System.out.println("\nThe new equipment you found is: \n" + e);
 	System.out.print("Would you like to switch? (Y)es or (N)o: ");
 	String answer = s.nextLine();
+	
+	if (answer.equals("")) // stops the program from crashing if the player fails to input anything
+			answer = "Zoinks!";
+			
 	if (answer.charAt(0) == 'Y' || answer.charAt(0) == 'y') {
 		dmgEquipment = e;
 		System.out.println("You equipped it!\n");

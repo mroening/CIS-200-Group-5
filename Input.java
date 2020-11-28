@@ -1,3 +1,13 @@
+ /**
+ * Input.java
+ * Micah Roening
+ * CIS 200 Scholar's Section 
+ *
+ * This class allows a user to input Equipment, Monsters, Choices, and Traps.
+ * These things will then be put into the main game!
+ * There is a tutorial to teach a user the details of the process.
+ */ 
+
 import java.util.*;
 import java.io.*;
 
@@ -5,6 +15,13 @@ public class Input {
 
 	private String type;
 	private Scanner s = new Scanner(System.in);
+	
+	/** Input
+	* This no-arg constructor allows the user to enter the tutorial and
+	* allows them to choose what kind of object they would like to create.
+	*
+	* @return void
+	*/ 
 	
 	public Input () {
 		boolean validClass = false;
@@ -33,6 +50,12 @@ public class Input {
 		type = choice;
 	}
 	
+	/** createNewThing
+	* This method calls the methods to create individual objects
+	*
+	* @return void
+	*/ 
+	
 	public void createNewThing () throws IOException {
 		if (type.equalsIgnoreCase("Equipment")) {
 			createEquipment();
@@ -45,6 +68,12 @@ public class Input {
 		} 
 	}
 	
+	/** createEquipment
+	* This method allows a user to create equipment
+	*
+	* @return void
+	*/ 
+	
 	public void createEquipment () throws IOException {
 		String name = "";
 		String type = "";
@@ -54,7 +83,6 @@ public class Input {
 		File equipmentFile = new File("Relics.txt");
 		Scanner readFile = new Scanner(equipmentFile);
 		
-		// add tutorial/point to README
 		System.out.println("Welcome to Equipment creation!");
 		
 		// getting a valid type for the equipment
@@ -140,6 +168,12 @@ public class Input {
 		
 	}
 	
+	/** createMonster
+	* This method allows a user to create monsters
+	*
+	* @return void
+	*/ 
+	
 	public void createMonster () throws IOException {
 		int health = 0;
 		int damage = 0;
@@ -150,7 +184,6 @@ public class Input {
 		File monsterFile = new File("Monsters.txt");
 		Scanner readFile = new Scanner(monsterFile);
 		
-		// add tutorial/point to README
 		System.out.println("Welcome to Monster creation!");
 		
 		// getting a valid location for the monster
@@ -250,6 +283,12 @@ public class Input {
 		
 	}
 	
+	/** createChoice
+	* This method allows a user to create choices
+	*
+	* @return void
+	*/ 
+	
 	public void createChoice() throws IOException {
 		String description = "";
 		String optionA = "";
@@ -261,7 +300,6 @@ public class Input {
 		
 		File choiceFile = new File("Choices.txt");
 		
-		// add tutorial/point to README
 		System.out.println("Welcome to Choice creation!");
 		
 		// getting a valid location for the monster
@@ -329,6 +367,12 @@ public class Input {
 		
 	}
 	
+	/** createTrap
+	* This method allows a user to create Traps
+	*
+	* @return void
+	*/ 
+	
 	public void createTrap () throws IOException {
 		String description = "";
 		int damage = 0;
@@ -339,7 +383,6 @@ public class Input {
 		
 		File trapFile = new File("Traps.txt");
 		
-		// add tutorial/point to README
 		System.out.println("Welcome to Trap creation!");
 		
 		// getting a valid location for the monster
@@ -406,6 +449,12 @@ public class Input {
 		System.out.println("Trap created! I hope it gets the hero! (you maniac)");
 		
 	}
+	
+	/** devTutorial
+	* This method tells the user how to use Dev Mode.
+	*
+	* @return void
+	*/ 
 	
 	public void devTutorial () {
 		System.out.println("Ah! A newcomer! Welcome to DEVELOPER MODE!!!! Imagine some epic music just played. I'd have done it, but we're kind of on a budget.");
@@ -546,5 +595,5 @@ public class Input {
 		System.out.println("Welp, that's it from me. Have fun breaking the game!");
 		wait = s.nextLine();
 	}
-
+	
 }

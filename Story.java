@@ -26,7 +26,7 @@ public class Story {
 	*/
 	public Story(String name) {
 		int i = 0;
-		while (i < 7) {
+		while (i < 7) { // this fills the array with junk, in case we try to reference an index that doesn't exist!
 			story.add("X");
 			i++;
 		}

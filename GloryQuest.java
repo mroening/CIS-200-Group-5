@@ -1,15 +1,52 @@
+ /**
+ * GloryQuest.java
+ * Micah Roening
+ * CIS 200 Scholar's Section 
+ *
+ * This is GloryQuest! It runs the game, GLORYQUEST. 
+ * The game consists of semi-random encounters, player choices,
+ * and culminates in a final boss fight. The program continues until
+ * The play quits in the main menu.
+ */ 
+
 import java.util.*;
 import java.io.*;
 
+/** P
+	* D
+	*
+	* @param p
+	*
+	* @return void
+	*/ 
+	
 public class GloryQuest {
+	
+	/** main
+	* Main calls mainMenu() to start the program
+	*
+	* @param String[] args Command-Line Arguments
+	*
+	* @return void
+	*/ 
 	
 	public static void main(String[] args) throws IOException {
 		mainMenu(0);
 	}
 	
+	/** mainMenu
+	* This method allows the player to play the game, go into
+	* Dev mode, or quit the program.
+	*
+	* @param int dead This parameter allows the menu to react to the player's current status.
+	*
+	* @return void
+	*/ 
+	
 	public static void mainMenu (int dead) throws IOException {
 		Scanner s = new Scanner(System.in);
 		
+		// different responses for if the player just booted up the game, died, or won
 		if (dead == 0) 
 			System.out.print("\nWelcome to GLORYQUEST! Type (P)lay to play GLORYQUEST, type (D)ev to enter Developer mode, or (Q)uit to exit GloryQuest: ");
 		else if (dead == 1)
@@ -25,7 +62,8 @@ public class GloryQuest {
 			System.out.print("So, you want to do that right now? If so, type (P)lay! If you DON'T want to follow up on my stupendous advice, type (Q)uit.\nOR, you could be thinking, now that you've beaten the game, it could be better! In that case, why not try out (D)ev mode? It's fun, I swear! Well, it's your choice. What's it gonna be? ");
 			
 		}
-			
+		
+		// This section takes in the menu input, and, if the input was invalid, starts the game
 		String titleString = s.nextLine().toLowerCase();
 		if (titleString.equals(""))
 			titleString = "Zoinks!";
@@ -47,6 +85,17 @@ public class GloryQuest {
 			playGame();
 		}
 	}
+	
+	/** playGame
+	* This method reads in content from the game files, 
+	* gets the name from the player, and then randomly chooses
+	* what events the player will go through between the story events,
+	* ending with the boss battle. The player's progress through the game
+	* is tracked by the time varible.
+	*
+	* @return void
+	*/ 
+	
 	public static void playGame () throws IOException {
 		Random r = new Random();
 		
@@ -152,13 +201,14 @@ public class GloryQuest {
 		
 		Scanner s = new Scanner(System.in);
 		
-		int time = 0;
+		int time = 0; // this is time! It ticks up as the player goes through the game, increasing difficulty (and the strength of treasure)! Think of it like the "game clock"!
 		boolean presentaionTime = false;
 		// introduction
 		System.out.println("\nIt's dark. It hurts. Your head swims, and your vision comes in and out of focus. You try to focus on something... your name! You must have a name...");
 		System.out.print("But what was it? (Enter your name here): ");
 		String name = s.nextLine();
 		
+		// getting the name from the player, checking for special cases
 		if (name.equals("")) {
 			name = nullName();
 		} else if (name.equalsIgnoreCase("dennis") || name.equalsIgnoreCase("dennis lang")) {
@@ -171,7 +221,10 @@ public class GloryQuest {
 		System.out.println("Of course! " + name + "! Now sit back, relax, and get comfy! You're about to embark on...");
 		chill();
 		
+		// creating the player object
 		Player hero = new Player(name);
+		
+		// buffing the player if in presentation mode
 		if (presentaionTime == true) {
 			hero.addMaxHealth(90);
 			hero.addDamage(98);
@@ -180,17 +233,17 @@ public class GloryQuest {
 		Story story = new Story(name); // The Quest Begins!
 		chill();
 		
-		// first half of the game
+		// first half of the game, this calls the cave while loop if the player chose cave, and the forest if the player chose forest
 		if (story.getEventDecision(0).equals("cave")) {
 			while (time < 3) {
 				time = theCave(time, hero, relics, caveMonsters, caveChoices, caveTraps);
 			}
-			story.event1();
+			story.event1(); // this calls the second choice
 			chill();
 			while (time < 6) {
 				time = theCave(time, hero, relics, caveMonsters, caveChoices, caveTraps);
 			}
-			story.event2();
+			story.event2(); // this resolves the second choice and changes the environment
 			chill();
 			
 		} else {
@@ -206,20 +259,20 @@ public class GloryQuest {
 			chill();
 		}
 		
-		// Last half of the game 
+		// Last half of the game, has while loops for each of the four areas, depending on where the player is
 		if (story.getEventDecision(1).equals("cave")) {
 			while (time < 11) {
 				int isStory = r.nextInt(4);
-				if (isStory == 0) {
+				if (isStory == 0) { // there is a 25% chance for the player to run into a story event at any given turn in these loops
 					storyBook(story, hero);
 					time++;
 				} else {
 					time = theCave(time, hero, relics, caveMonsters, caveChoices, caveTraps);
 				}
 			}
-			story.event7();
+			story.event7(); // this calls the boss entrance dialog
 			chill();
-			bossBattle(getBoss(story.getEventDecision(1), bosses), hero);
+			bossBattle(getBoss(story.getEventDecision(1), bosses), hero); // this calls the final boss battle
 			
 		} else if (story.getEventDecision(1).equals("forest")) {
 			while (time < 11) {
@@ -267,21 +320,50 @@ public class GloryQuest {
 		
 	}
 	
+	/** theCave
+	* This method randomly chooses between a battle, choice, or trap for
+	* the player to face. It then advances the turn timer, and returns that value.
+	*
+	* @param int time The turn the player is currently on
+	* @param Player hero The player object
+	* @param ArrayList <Equipment> relics The ArrayList of Equipment
+	* @param ArrayList <Monster> caveMonsters The ArrayList of Cave-Specific Monsters
+	* @param ArrayList <Choice> caveChoices The ArrayList of Cave-Specific Choices
+	* @param ArrayList <Trap> caveTraps The ArrayList of Cave-Specific Traps
+	*
+	* @return time The game clock
+	*/ 
+	
 	public static int theCave (int time, Player hero, ArrayList <Equipment> relics, ArrayList <Monster> caveMonsters,  ArrayList <Choice> caveChoices,  ArrayList <Trap> caveTraps) {
 		Random r = new Random();
 		int thisEvent = r.nextInt(12);
 		
-		if (thisEvent < 4)
+		if (thisEvent < 6) // there is a 42% chance a battle will occur
 			battle(time, hero, caveMonsters);
-		else if (thisEvent < 8) 
+		else if (thisEvent < 9) // a 25% chance for a trap to happen
 			trap(time, hero, caveTraps, relics);
-		else
+		else // and a 33% chance a choice will occur
 			choice(time, hero, caveChoices, relics);
 			
 		time++;
-		
+		// looking back, these location specific methods became so similar, I probably only need one of them! Oh well. 
+		// I could always adjust the battle/choice/trap chances to make the areas more unique in the future
 		return time;
 	}
+	
+	/** theForest
+	* This method randomly chooses between a battle, choice, or trap for
+	* the player to face. It then advances the turn timer, and returns that value.
+	*
+	* @param int time The turn the player is currently on
+	* @param Player hero The player object
+	* @param ArrayList <Equipment> relics The ArrayList of Equipment
+	* @param ArrayList <Monster> forestMonsters The ArrayList of forest-Specific Monsters
+	* @param ArrayList <Choice> forestChoices The ArrayList of forest-Specific Choices
+	* @param ArrayList <Trap> forestTraps The ArrayList of forest-Specific Traps
+	*
+	* @return time The game clock
+	*/ 
 	
 	public static int theForest (int time, Player hero, ArrayList <Equipment> relics, ArrayList <Monster> forestMonsters,  ArrayList <Choice> forestChoices,  ArrayList <Trap> forestTraps) {
 		Random r = new Random();
@@ -299,6 +381,20 @@ public class GloryQuest {
 		return time;
 	}
 	
+	/** theWasteland
+	* This method randomly chooses between a battle, choice, or trap for
+	* the player to face. It then advances the turn timer, and returns that value.
+	*
+	* @param int time The turn the player is currently on
+	* @param Player hero The player object
+	* @param ArrayList <Equipment> relics The ArrayList of Equipment
+	* @param ArrayList <Monster> wastelandMonsters The ArrayList of wasteland-Specific Monsters
+	* @param ArrayList <Choice> wastelandChoices The ArrayList of wasteland-Specific Choices
+	* @param ArrayList <Trap> wastelandTraps The ArrayList of wasteland-Specific Traps
+	*
+	* @return time The game clock
+	*/ 
+	
 	public static int theWasteland (int time, Player hero, ArrayList <Equipment> relics, ArrayList <Monster> wastelandMonsters,  ArrayList <Choice> wastelandChoices,  ArrayList <Trap> wastelandTraps) {
 		Random r = new Random();
 		int thisEvent = r.nextInt(12);
@@ -314,6 +410,20 @@ public class GloryQuest {
 		
 		return time;
 	}
+	
+	/** theVillage
+	* This method randomly chooses between a battle, choice, or trap for
+	* the player to face. It then advances the turn timer, and returns that value.
+	*
+	* @param int time The turn the player is currently on
+	* @param Player hero The player object
+	* @param ArrayList <Equipment> relics The ArrayList of Equipment
+	* @param ArrayList <Monster> villageMonsters The ArrayList of village-Specific Monsters
+	* @param ArrayList <Choice> villageChoices The ArrayList of village-Specific Choices
+	* @param ArrayList <Trap> villageTraps The ArrayList of village-Specific Traps
+	*
+	* @return time The game clock
+	*/ 
 	
 	public static int theVillage (int time, Player hero, ArrayList <Equipment> relics, ArrayList <Monster> villageMonsters,  ArrayList <Choice> villageChoices,  ArrayList <Trap> villageTraps) {
 		Random r = new Random();
@@ -331,6 +441,19 @@ public class GloryQuest {
 		return time;
 	}
 	
+	/** choice
+	* This method randomly chooses a choice for the player, randomly
+	* chooses a reward (and if there will be a reward), and then
+	* outputs that choice for the player to interact with.
+	*
+	* @param int time The turn the player is currently on
+	* @param Player hero The player object
+	* @param ArrayList <Equipment> relics The ArrayList of Equipment
+	* @param ArrayList <Choice> choices An ArrayList of choices
+	*
+	* @return void
+	*/ 
+	
 	public static void choice (int time, Player hero, ArrayList <Choice> choices, ArrayList <Equipment> relics) {
 		Random r = new Random();
 		int thisChoice = r.nextInt(choices.size());
@@ -346,6 +469,19 @@ public class GloryQuest {
 		chill();
 
 	}
+	
+	/** trap
+	* This method randomly chooses a trap for the player, randomly
+	* chooses a reward (and if there will be a reward), and then
+	* outputs that trap for the player to interact with.
+	*
+	* @param int time The turn the player is currently on
+	* @param Player hero The player object
+	* @param ArrayList <Equipment> relics The ArrayList of Equipment
+	* @param ArrayList <Trap> traps An ArrayList of choices
+	*
+	* @return void
+	*/ 
 	
 	public static void trap (int time, Player hero, ArrayList <Trap> traps, ArrayList <Equipment> relics) {
 		Random r = new Random();
@@ -364,11 +500,22 @@ public class GloryQuest {
 		chill();
 	}
 	
+	/** battle
+	* This method randomly chooses a monster for the player to fight, and then
+	* outputs a battle with that monster for the player to interact with.
+	*
+	* @param int time The turn the player is currently on
+	* @param Player hero The player object
+	* @param ArrayList <Monster> monsters An ArrayList of monsters
+	*
+	* @return void
+	*/ 
+	
 	public static void battle (int time, Player hero, ArrayList <Monster> monsters) {
 		Random r = new Random();
 		ArrayList <Monster> tempMonsters = new ArrayList <> ();
 		
-		for (int i = 0; i < monsters.size(); i++) {
+		for (int i = 0; i < monsters.size(); i++) { // this loop makes sure the monster about the right difficulty for the player (and sometimes a bit harder!)
 			if ((monsters.get(i).getDifficulty() > time - 1) && (monsters.get(i).getDifficulty() < time + 3)) {
 				Monster deepMonsterCopy = new Monster(monsters.get(i));
 				tempMonsters.add(deepMonsterCopy);
@@ -381,7 +528,7 @@ public class GloryQuest {
 		Battles fight = new Battles();
 		int isDead = fight.battleMonster(tempMonsters.get(thisMonster), hero);
 		
-		if (isDead <= 0) {
+		if (isDead <= 0) { // this statement deals with player death / victory
 			deathMessage(tempMonsters.get(thisMonster).getName());
 			try {
 				mainMenu(1);
@@ -396,17 +543,26 @@ public class GloryQuest {
 			chill();
 	}
 	
+	/** bossBattle
+	* This method puts the player up against the final boss!
+	*
+	* @param Boss boss The boss.
+	* @param Player hero The player object
+	*
+	* @return void
+	*/ 
+	
 	public static void bossBattle (Boss boss, Player hero) {
 		System.out.println("The air is still. You each stand your ground, daring the other to make the first move. In a flash, you both charge. This is it! The ultimate battle! The final challenge! The fight... for GLORY!");
 		Battles fight = new Battles();
 		
-		int isDead = fight.battleBoss(boss, hero);
+		int isDead = fight.battleBoss(boss, hero); // calls the method in battle to fight the boss
 		
-		if (isDead <= 0) { // maybe add some more death dialouge?
+		if (isDead <= 0) { // this statement deals with player death / victory
 			deathMessage(boss.getName());
 			try {
 				mainMenu(1);
-			} catch (IOException x) {
+			} catch (IOException x) { // if, for some unforseen reason, a file breaks AFTER the game has been finished. This shouldn't happen this late, but here's the error checking anyways!
 				System.out.println("Wow! You died so hard, you broke the game! Congrats? You might want to check your installation, and then restart the game.");
 				System.exit(1);
 			}
@@ -422,7 +578,17 @@ public class GloryQuest {
 			}
 	}
 	
+	/** getBoss
+	* This method chooses a boss to fight based on the location of the player.
+	*
+	* @param String location The area of the game the player is currently in
+	* @param ArrayList <Boss> bosses The ArrayList of Bosses
+	*
+	* @return returnBoss The boss the player is going to fight
+	*/ 
+	
 	public static Boss getBoss (String location, ArrayList <Boss> bosses) {
+		// with more development time (i.e., more bosses), this method could be retooled to choose from a multitude of bosses
 		Boss returnBoss = new Boss();
 		
 		for (int i = 0; i < bosses.size(); i++) {
@@ -442,6 +608,16 @@ public class GloryQuest {
 		return returnBoss;
 	}
 	
+	/** storyBook
+	* This method randomly chooses between one of the generalized story events.
+	* It then outputs it for the player to interact with.
+	*
+	* @param Story story The Story object running part of the game
+	* @param Player hero The player object
+	*
+	* @return void
+	*/ 
+	
 	public static void storyBook (Story story, Player hero) {
 		Random r = new Random();
 		int thisStory = r.nextInt(4);
@@ -459,11 +635,20 @@ public class GloryQuest {
 			
 	}
 	
+	/** generateReward
+	* This method generates a reward about on level with the player.
+	*
+	* @param int time The game clock
+	* @param ArrayList <Equipment> relics The ArrayList of Equipment
+	*
+	* @return tempReward A reward object
+	*/ 
+	
 	public static Reward generateReward (int time, ArrayList <Equipment> relics) {
 		Random r = new Random();
 		ArrayList <Equipment> tempRelics = new ArrayList <> ();
 			
-		for (int i = 0; i < relics.size(); i++) {
+		for (int i = 0; i < relics.size(); i++) { // this method makes a copy of the equipment BEFORE removing over/under leveled stuff
 			Equipment deepEquipmentCopy = new Equipment(relics.get(i));
 			tempRelics.add(deepEquipmentCopy);
 		}
@@ -476,16 +661,31 @@ public class GloryQuest {
 		}
 			
 		int thisReward = r.nextInt(tempRelics.size());
-		Reward tempReward = new Reward(0, tempRelics.get(thisReward));
+		Reward tempReward = new Reward(0, tempRelics.get(thisReward)); // rewards include something called Gold. This was an idea that came up in mid-development, 
+		// and was ultimately scrapped. You can see a remnant of that in the '0' parameter for the Reward constructor!
 		
 		return tempReward;
 	}
+	
+	/** chill
+	* This method stops the game, allowing the player to take a breath,
+	* and continues the game on a button press.
+	*
+	* @return void
+	*/ 
 	
 	public static void chill () {
 		Scanner s = new Scanner(System.in);
 		System.out.println("\tPress any key to continue...\n");
 		String breakTime = s.nextLine();
 	}
+	
+	/** nullName
+	* This method returns a random, somewhat insulting / funny name for the player to use.
+	* It is called if the player fails to input a name.
+	*
+	* @return The supplied player name
+	*/ 
 	
 	public static String nullName () {
 		Scanner s = new Scanner(System.in);
@@ -517,9 +717,15 @@ public class GloryQuest {
 		
 	}
 	
-	public static void dennisQuest () {
+	/** dennisQuest
+	* DennisQuest.
+	*
+	* @return void
+	*/ 
+	
+	public static void dennisQuest () { // DennisQuest
 		Scanner s = new Scanner(System.in);
-		Player dennis = new Player("Dennis");
+		Player dennis = new Player("Dennis"); // DennisQuest
 		dennis.addMaxHealth(91);
 		dennis.addDamage(98);
 		dennis.heal();
@@ -530,13 +736,13 @@ public class GloryQuest {
 						   "\nOne. More. One more conquest, and then you will have all the GLORY you could ever want. Glory. Glory! GLORY!!!!!!");
 		chill();
 		
-		Boss dennisBoss = new Boss("Dennis", 1000, 25, "Joshua Weese", 11);
+		Boss dennisBoss = new Boss("Dennis", 1000, 25, "Joshua Weese", 11); // DennisQuest
 		dennisBoss.setDescription("GLORY!! GLORY! GLORY!!! GLORY! GLORY!!!!!");
 		
 		Battles dennisFight = new Battles();
-		int isDead = dennisFight.battleBoss(dennisBoss, dennis);
+		int isDead = dennisFight.battleBoss(dennisBoss, dennis); // DennisQuest
 		
-		if (isDead <= 0) {
+		if (isDead <= 0) { // dennisquest
 			System.out.print("No! Impossible! The... the glory! Glory! GLORY! The lone swordsman watches as the life drains from your eyes. He shakes his head," +
 							 "\nand picks you up. Time passes. Mountains, deserts, oceans and plains pass by in a haze. Finally, you enter into a familiar forest." +
 							 "\nYou finally stop, and your body falls to the ground. You see the man put a shoddy sword on the ground next to you. He takes a final look" +
@@ -554,7 +760,7 @@ public class GloryQuest {
 			wait = s.nextLine();
 			
 			int i = 0;
-			while (i < 100000) {
+			while (i < 100000) { // DENNISQUEST
 				System.out.print("GLORY");
 				i++;
 			}
@@ -563,22 +769,31 @@ public class GloryQuest {
 		}
 	}
 	
+	/** deathMessage
+	* This method returns a random, somewhat insulting / funny death message whenever the player
+	* dies.
+	* 
+	* @param String monsterName The name of the monster that killed the player
+	* @return void
+	*/ 
+	
 	public static void deathMessage(String monsterName) {
 		Random r = new Random();
-		int thisDeath = r.nextInt(30);
+		int thisDeath = r.nextInt(31);
 		
 		chill();
 		
+		// we figured death was an important (or at least frequent) part of the game, so I made some more death messages! These should (hopefully) made death a little more enjoyable.
 		if (thisDeath == 0) {
 			System.out.println("You collapse to the ground. Your body, broken. Your mind, fading. As the " + monsterName + " looms over you, you feel yourself slipping away...\nAway...");
 		} else if (thisDeath == 1) {
-			System.out.print("You collapse onto the ground, defeated. As the " + monsterName + " lunges for the finishing blow, you wonder what possessed you to go on a Quest for Glory.\nI mean, you wake up outside a cave, and your first thought is to find a horrific beast to fight to the death? I mean, really, what kind of person does that? These thoughts do little to soften the incoming coup de grace, though. \nYour final thought before going to the great beyond is:");
+			System.out.print("You collapse onto the ground, defeated. As the " + monsterName + " lunges for the finishing blow, you wonder what possessed you to go on a Quest for Glory.\nI mean, you wake up outside a cave, and your first thought is to find a horrific beast to fight to the death? \nI mean, really, what kind of person does that? These thoughts do little to soften the incoming coup de grace, though. \nYour final thought before going to the great beyond is: ");
 			System.out.println("I wonder what it will sound like?\n\n...crunch\n\nAfterwards, you are too busy being dead to wonder what part of your body being eviscerated made that noise.");
 		} else if (thisDeath == 2) {
-			System.out.print("You collapse onto the ground, defeated. As the " + monsterName + " lunges for the finishing blow, you wonder what possessed you to go on a Quest for Glory.\nI mean, you wake up outside a cave, and your first thought is to find a horrific beast to fight to the death? I mean, really, what kind of person does that? These thoughts do little to soften the incoming coup de grace, though. \nYour final thought before going to the great beyond is:");
+			System.out.print("You collapse onto the ground, defeated. As the " + monsterName + " lunges for the finishing blow, you wonder what possessed you to go on a Quest for Glory.\nI mean, you wake up outside a cave, and your first thought is to find a horrific beast to fight to the death? \nI mean, really, what kind of person does that? These thoughts do little to soften the incoming coup de grace, though. \nYour final thought before going to the great beyond is: ");
 			System.out.println("Wait, didn't I come out here to collect some forest berries?\n\n...spurlch\n\nAfterwards, you are too busy being dead to wonder what possessed you to fight a " + monsterName +" instead of collecting berries.");
 		} else if (thisDeath == 3) {
-			System.out.print("You collapse onto the ground, defeated. As the " + monsterName + " lunges for the finishing blow, you wonder what possessed you to go on a Quest for Glory.\nI mean, you wake up outside a cave, and your first thought is to find a horrific beast to fight to the death? I mean, really, what kind of person does that? These thoughts do little to soften the incoming coup de grace, though. \nYour final thought before going to the great beyond is:");
+			System.out.print("You collapse onto the ground, defeated. As the " + monsterName + " lunges for the finishing blow, you wonder what possessed you to go on a Quest for Glory.\nI mean, you wake up outside a cave, and your first thought is to find a horrific beast to fight to the death? \nI mean, really, what kind of person does that? These thoughts do little to soften the incoming coup de grace, though. \nYour final thought before going to the great beyond is: ");
 			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA!\n\n...SMASH!\n\nAfterwards, you are too busy being dead to continue screaming.");
 		} else if (thisDeath == 4) {
 			System.out.println("You stand, breathing heavily. Though greviously wounded, you steel yourself. You can do this! For glory! You draw yourself up, and commit to a final, desperate charge against the " + monsterName + ".");
@@ -648,10 +863,11 @@ public class GloryQuest {
 			System.out.println("The ball kept going and going, and you kept running and running, and the crowd was going wild, and the other team couldn't stop it, because it was a home run, a GRAND SLAM! YES! You won! You won...");
 			chill();
 			int flyball = r.nextInt(50);
-			System.out.println("The " + monsterName + ", still winding up for its big attack, hits you like an ace batter. You fly " + flyball + " feet, before hitting something and falling down in a bloody heap.\nMaybe keep your eye on the ball next time, sport.");
+			System.out.println("The " + monsterName + ", still winding up for its big attack, hits you like an ace batter. You fly " + flyball + " feet before hitting something and falling down in a bloody heap.\nMaybe keep your eye on the ball next time, sport.");
 		} else if (thisDeath == 22) {
 			System.out.println("The " + monsterName + " skewers you with a spear. 'Where did it even get one of those?', you wonder, as you collapse, defeated, onto the ground.");
 		} else if (thisDeath == 23) {
+			// this one is a personal favorite
 			System.out.println("The " + monsterName + " pulls out a pineapple, and starts beating you to death with it. 'Where did it even get one of those?', you wonder, as you collapse, defeated, onto the ground.");
 		} else if (thisDeath == 24) {
 			System.out.println("The " + monsterName + " pulls out a 2013 Smith & Wesson M&P15-22, and fills you full of lead. 'Where did it even get one of those?', you wonder, as you collapse, defeated, onto the ground.");
