@@ -1,4 +1,0 @@
-cave:45:13:Beholder:10
-forest:60:20:Green Dragon:10
-wasteland:48:14:Lich:10
-village:53:16:Giant Ogre:10
